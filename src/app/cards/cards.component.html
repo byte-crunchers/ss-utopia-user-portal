@@ -1,0 +1,145 @@
+<main>
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Utopia Financial</h1>
+        <p class="lead text-muted">View All Available Cards</p>
+
+        <p>
+          <a href="/cards/table" class="btn btn-primary my-2">Compare Cards</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="assets/{{images[1]}}" alt="image">
+
+            <div class="card-body">
+              <h4>{{cards[1].cardName}}</h4>
+              <p class="card-text">Annual Fee: ${{cards[1].annualFee}} <br>APR: {{cards[1].apr | percent:'1.0-5'}} <br>Cash Back: {{cards[1].cashBack | percent:'1.0-5'}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary" (click)="openModal(infoModal, 1)">More Info</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" >Sign Up</button>
+                </div>
+                <small class="text-muted"></small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="assets/{{images[2]}}" alt="image">
+
+            <div class="card-body">
+              <h4>{{cards[2].cardName}}</h4>
+              <p class="card-text">Annual Fee: ${{cards[2].annualFee}} <br>APR: {{cards[2].apr | percent:'1.0-5'}} <br>Cash Back: {{cards[2].cashBack | percent:'1.0-5'}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary" (click)="openModal(infoModal, 2)">More Info</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" >Sign Up</button>
+                </div>
+                <small class="text-muted"></small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="assets/{{images[3]}}" alt="image">
+
+            <div class="card-body">
+              <h4>{{cards[3].cardName}}</h4>
+              <p class="card-text">Annual Fee: ${{cards[3].annualFee}} <br>APR: {{cards[3].apr | percent:'1.0-5'}} <br>Cash Back: {{cards[3].cashBack | percent:'1.0-5'}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary" (click)="openModal(infoModal, 3)">More Info</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" >Sign Up</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="assets/{{images[0]}}" alt="image">
+
+            <div class="card-body">
+              <h4>{{cards[0].cardName}}</h4>
+              <p class="card-text">Annual Fee: ${{cards[0].annualFee}} <br>APR: {{cards[0].apr | percent:'1.0-5'}} <br>Cash Back: {{cards[0].cashBack | percent:'1.0-5'}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary" (click)="openModal(infoModal, 0)">More Info</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" >Sign Up</button>
+                </div>
+                <small class="text-muted"></small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <img src="assets/{{images[4]}}" alt="image">
+
+            <div class="card-body">
+              <h4>{{cards[4].cardName}}</h4>
+              <p class="card-text">Annual Fee: ${{cards[4].annualFee}} <br>APR: {{cards[4].apr | percent:'1.0-5'}} <br>Foodies Points: {{cards[4].foodiesPointsPercentages | percent:'1.0-5'}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary" (click)="openModal(infoModal, 4)">More Info</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" >Sign Up</button>
+                </div>
+                <small class="text-muted"></small>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+  </div>
+  
+</main>
+
+<ng-template #infoModal let-c="close" let-d="dismiss">
+  
+    <div class="modal-dialog">
+      <p class="text-center">Card Details</p>
+
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <img src="assets/{{modalImage}}" width="100%" alt="image">
+        </div>
+        <div class="modal-body">
+        <h4 class="modal-title">{{modalHeader}}</h4><br>
+        
+        <p>Annual Fee: ${{modalInfo[0]}} <br>APR: {{modalInfo[1] | percent:'1.0-5'}} <br>Cash Back: {{modalInfo[2] | percent:'1.0-5'}} <br>
+          Foodies Points: {{modalInfo[3] | percent:'1.0-5'}} <br>Late Fee: ${{modalInfo[4]}} </p>
+          
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+            (click)="closeModal()"
+          >
+            Close
+          </button>
+          
+        </div>
+      </div>
+    </div>
+  
+</ng-template>
+  
