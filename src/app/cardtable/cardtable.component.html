@@ -1,37 +1,47 @@
 <main>
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Utopia Financial</h1>
-        <p class="lead text-muted">Compare Cards</p>  
-      </div>
-    </div>
-  </section>
+    <section class="py-5 container">
+        <div class="row py-lg-5 text-center">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">Utopia Financial</h1>
+                <p class="lead text-muted">Compare Cards</p>
+            </div>
+        </div>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Card Name</th>
-        <th scope="col">Annual Fee</th>
-        <th scope="col">APR</th>
-        <th scope="col">Foodie Points</th>
-        <th scope="col">Cash Back</th>
-        <th scope="col">Late Fee</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let x of cards; let i=index">
-        <th scope="row">{{ i+1 }}</th>
-        <td>{{x.cardName}}</td>
-        <td>${{x.annualFee}}</td>
-        <td>{{x.apr | percent:'1.0-5'}}</td>
-        <td>{{x.foodiesPointsPercentages | percent:'1.0-5'}}</td>
-        <td>{{x.cashBack | percent:'1.0-5'}}</td>
-        <td>${{x.lateFee}}</td>
-      </tr>
-    </tbody>
-  </table>
+        <br>
+        <div class="row">
+            <div class="col">
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Card Name</th>
+                            <th scope="col">Annual Fee</th>
+                            <th scope="col">APR</th>
+                            <th scope="col">Foodie Points</th>
+                            <th scope="col">Cash Back</th>
+                            <th scope="col">Late Fee</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let x of cards; let i=index">
+                            <td>{{x.cardName}}</td>
+                            <td>${{x.annualFee}}</td>
+                            <td>{{x.apr | percent:'1.0-5'}}</td>
+                            <td>{{x.foodiesPointsPercentages | percent:'1.0-5'}}</td>
+                            <td>{{x.cashBack | percent:'1.0-5'}}</td>
+                            <td>${{x.lateFee}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br><br>
+                <p class="text-center">
+                    <a routerLink="/cards" class="btn btn-primary my-2">Back to Cards</a>
+                </p>
+
+            </div>
+        </div>
+
+    </section>
 
 </main>
-  

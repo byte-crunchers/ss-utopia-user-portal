@@ -1,145 +1,160 @@
 <main>
     <section class="py-5 text-center container">
-      <div class="row py-lg-5">
-        <div class="col-lg-6 col-md-8 mx-auto">
-          <h1 class="fw-light">Utopia Financial</h1>
-          <p class="lead text-muted">View All Available Loans</p>
-  
-          <p>
-            <a href="/loans/table" class="btn btn-primary my-2">Compare Loans</a>
-          </p>
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">Utopia Financial</h1>
+                <p class="lead text-muted">View Available Loans</p>
+
+                <p>
+                    <a routerLink="/loans/table" class="btn btn-primary my-2">Compare Loans</a>
+                </p>
+            </div>
         </div>
-      </div>
     </section>
-  
+
     <div class="album py-5 bg-light">
-      <div class="container">
-  
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-  
-          <div class="col">
-            <div class="card shadow-sm">
-              <img src="assets/{{images[0]}}" alt="image">
-  
-              <div class="card-body">
-                <h4>{{loans[0].loanName}}</h4>
-                <p class="card-text">Sample Principal: ${{loans[0].principal | number:'1.0'}} <br>Installment Payments: ${{loans[0].installmentPayments | number:'1.0'}} / month <br>Interest Rate: {{loans[0].interestRate | percent:'1.0-5'}}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary" (click)="openModal(infoModal, 0)">More Info</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary" >Sign Up</button>
-                  </div>
-                  <small class="text-muted"></small>
+        <div class="container">
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="assets/{{images[0]}}" alt="image">
+
+                        <div class="card-body">
+                            <h4>{{loans[0].loanName}}</h4>
+                            <p class="card-text">Sample Principal: ${{loans[0].principal | number:'1.0'}}
+                                <br>Installment Payments: ${{loans[0].installmentPayments | number:'1.0'}} / month
+                                <br>Interest Rate: {{loans[0].interestRate | percent:'1.0-5'}}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"
+                                        (click)="openModal(infoModal, 0)">More Info</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Sign Up</button>
+                                </div>
+                                <small class="text-muted"></small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <img src="assets/{{images[1]}}" alt="image">
-  
-              <div class="card-body">
-                <h4>{{loans[1].loanName}}</h4>
-                <p class="card-text">Sample Principal: ${{loans[1].principal | number:'1.0'}} <br>Installment Payments: ${{loans[1].installmentPayments | number:'1.0'}} / month <br>Interest Rate: {{loans[1].interestRate | percent:'1.0-5'}}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary" (click)="openModal(infoModal, 1)">More Info</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary" >Sign Up</button>
-                  </div>
-                  <small class="text-muted"></small>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="assets/{{images[1]}}" alt="image">
+
+                        <div class="card-body">
+                            <h4>{{loans[1].loanName}}</h4>
+                            <p class="card-text">Sample Principal: ${{loans[1].principal | number:'1.0'}}
+                                <br>Installment Payments: ${{loans[1].installmentPayments | number:'1.0'}} / month
+                                <br>Interest Rate: {{loans[1].interestRate | percent:'1.0-5'}}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"
+                                        (click)="openModal(infoModal, 1)">More Info</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Sign Up</button>
+                                </div>
+                                <small class="text-muted"></small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <img src="assets/{{images[2]}}" alt="image">
-  
-              <div class="card-body">
-                <h4>{{loans[2].loanName}}</h4>
-                <p class="card-text">Sample Principal: ${{loans[2].principal | number:'1.0'}} <br>Installment Payments: ${{loans[2].installmentPayments | number:'1.0'}} / month <br>Interest Rate: {{loans[2].interestRate | percent:'1.0-5'}}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary" (click)="openModal(infoModal, 2)">More Info</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary" >Sign Up</button>
-                  </div>
-                  <small class="text-muted"></small>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="assets/{{images[2]}}" alt="image">
+
+                        <div class="card-body">
+                            <h4>{{loans[2].loanName}}</h4>
+                            <p class="card-text">Sample Principal: ${{loans[2].principal | number:'1.0'}}
+                                <br>Installment Payments: ${{loans[2].installmentPayments | number:'1.0'}} / month
+                                <br>Interest Rate: {{loans[2].interestRate | percent:'1.0-5'}}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"
+                                        (click)="openModal(infoModal, 2)">More Info</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Sign Up</button>
+                                </div>
+                                <small class="text-muted"></small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card shadow-sm">
-              <img src="assets/{{images[3]}}" alt="image">
-  
-              <div class="card-body">
-                <h4>{{loans[3].loanName}}</h4>
-                <p class="card-text">Sample Principal: ${{loans[3].principal | number:'1.0'}} <br>Installment Payments: ${{loans[3].installmentPayments | number:'1.0'}} / month <br>Interest Rate: {{loans[3].interestRate | percent:'1.0-5'}}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary" (click)="openModal(infoModal, 3)">More Info</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary" >Sign Up</button>
-                  </div>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="assets/{{images[3]}}" alt="image">
+
+                        <div class="card-body">
+                            <h4>{{loans[3].loanName}}</h4>
+                            <p class="card-text">Sample Principal: ${{loans[3].principal | number:'1.0'}}
+                                <br>Installment Payments: ${{loans[3].installmentPayments | number:'1.0'}} / month
+                                <br>Interest Rate: {{loans[3].interestRate | percent:'1.0-5'}}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"
+                                        (click)="openModal(infoModal, 3)">More Info</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Sign Up</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col">
-            <div class="card shadow-sm">
-              <img src="assets/{{images[4]}}" alt="image">
-  
-              <div class="card-body">
-                <h4>{{loans[4].loanName}}</h4>
-                <p class="card-text">Sample Principal: ${{loans[4].principal | number:'1.0'}} <br>Installment Payments: ${{loans[4].installmentPayments | number:'1.0'}} / month <br>Interest Rate: {{loans[4].interestRate | percent:'1.0-5'}}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary" (click)="openModal(infoModal, 4)">More Info</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary" >Sign Up</button>
-                  </div>
-                  <small class="text-muted"></small>
+
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="assets/{{images[4]}}" alt="image">
+
+                        <div class="card-body">
+                            <h4>{{loans[4].loanName}}</h4>
+                            <p class="card-text">Sample Principal: ${{loans[4].principal | number:'1.0'}}
+                                <br>Installment Payments: ${{loans[4].installmentPayments | number:'1.0'}} / month
+                                <br>Interest Rate: {{loans[4].interestRate | percent:'1.0-5'}}
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"
+                                        (click)="openModal(infoModal, 4)">More Info</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Sign Up</button>
+                                </div>
+                                <small class="text-muted"></small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+
             </div>
-          </div>
-          
+
         </div>
-  
-      </div>
     </div>
-    
-  </main>
-  
-  <ng-template #infoModal let-c="close" let-d="dismiss">
-    
-      <div class="modal-dialog">
+
+</main>
+
+<ng-template #infoModal let-c="close" let-d="dismiss">
+
+    <div class="modal-dialog">
         <p class="text-center">Loan Details</p>
-  
+
         <div class="modal-content">
-          
-          <div class="modal-header">
-            <img src="assets/{{modalImage}}" width="100%" alt="image">
-          </div>
-          <div class="modal-body">
-          <h4 class="modal-title">{{modalHeader}}</h4><br>
-          
-          <p>Sample Principal: ${{modalInfo[0] | number:'1.0'}} <br>Installment Payments: ${{modalInfo[1] | number:'1.0'}} / month <br>Term: {{modalInfo[2]}} years<br>
-            Interest Rate: {{modalInfo[3] | percent:'1.0-5'}} <br>Secured: {{modalInfo[4] | yesNo}} </p>
-            
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-              (click)="closeModal()"
-            >
-              Close
-            </button>
-            
-          </div>
+
+            <div class="modal-header">
+                <img src="assets/{{modalImage}}" width="100%" alt="image">
+            </div>
+            <div class="modal-body">
+                <h4 class="modal-title">{{modalHeader}}</h4><br>
+
+                <p>Sample Principal: ${{modalInfo[0] | number:'1.0'}} <br>Installment Payments: ${{modalInfo[1] |
+                    number:'1.0'}} / month <br>Term: {{modalInfo[2]}} years<br>
+                    Interest Rate: {{modalInfo[3] | percent:'1.0-5'}} <br>Secured: {{modalInfo[4] | yesNo}} </p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">
+                    Close
+                </button>
+
+            </div>
         </div>
-      </div>
-    
-  </ng-template>
-    
+    </div>
+
+</ng-template>

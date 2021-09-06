@@ -17,30 +17,37 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YesNoPipe } from './shared/custom/usort.pipe';
 import { HighlightDirective } from './shared/custom/highlight.directive';
 import { LoanTableComponent } from './loantable/loantable.component';
+import { LoginComponent } from './login/login.component';
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    CardsComponent,
-    LoansComponent,
-    StocksComponent,
-    CardTableComponent,
-    LayoutComponent,
-    HeaderComponent,
-    FooterComponent,
-    YesNoPipe,
-    HighlightDirective,
-    LoanTableComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule
-  ],
-  providers: [HttpService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        CardsComponent,
+        LoansComponent,
+        StocksComponent,
+        CardTableComponent,
+        LayoutComponent,
+        HeaderComponent,
+        FooterComponent,
+        YesNoPipe,
+        HighlightDirective,
+        LoanTableComponent,
+        LoginComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule
+    ],
+    providers: [
+        HttpService,
+        { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+        JwtHelperService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

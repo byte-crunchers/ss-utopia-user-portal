@@ -3,10 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  BASE_PAI_URL: 'http://34.238.82.58:8090',
-  CARDS_GET_URL: '/cards',
-  LOANS_GET_URL: '/loans',
+    production: false,
+    BASE_PAI_URL: 'http://34.238.82.58:8090',
+    CARDS_GET_URL: '/cards',
+    LOANS_GET_URL: '/loans',
+    LOGIN_URL: 'https://34.238.82.58:8443/login'
 };
 
 /*

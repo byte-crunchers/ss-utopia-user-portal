@@ -6,30 +6,30 @@ import { environment } from 'src/environments/environment';
 
 
 @Component({
-  selector: 'app-loantable',
-  templateUrl: './loantable.component.html',
-  styleUrls: ['./loantable.component.css']
+    selector: 'app-loantable',
+    templateUrl: './loantable.component.html',
+    styleUrls: ['./loantable.component.css']
 })
 export class LoanTableComponent implements OnInit {
 
-  constructor(
-    private httpService: HttpService, 
-    private modalService: NgbModal,
-    private fb: FormBuilder
+    constructor(
+        private httpService: HttpService,
+        private modalService: NgbModal,
+        private fb: FormBuilder
     ) { }
-  loans: any;
-  totalLoans = 0;
-  today = new Date();
+    loans: any;
+    totalLoans = 0;
+    today = new Date();
 
-  ngOnInit(): void {
-    this.loadAllLoans();
-  }
+    ngOnInit(): void {
+        this.loadAllLoans();
+    }
 
-  loadAllLoans() {
-    this.httpService.getAll(`${environment.BASE_PAI_URL}${environment.LOANS_GET_URL}`).subscribe((res) => {
-      this.loans = res;
-      this.totalLoans = this.loans.length;
-    })
-  }
+    loadAllLoans() {
+        this.httpService.getAll(`${environment.BASE_PAI_URL}${environment.LOANS_GET_URL}`).subscribe((res) => {
+            this.loans = res;
+            this.totalLoans = this.loans.length;
+        })
+    }
 
 }
