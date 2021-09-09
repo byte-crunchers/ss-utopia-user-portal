@@ -11,8 +11,9 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
     data: any;
-    loginAttempts = 0;
+    showUnauthorized = false;
     showLink2 = false;
+    showSpinner = false;
 
     loginForm = this.formBuilder.group({
         username: '',
@@ -21,11 +22,14 @@ export class LoginComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private authService: AuthService,
+        public authService: AuthService,
         private router: Router
     ) { }
 
     onSubmit = (user: any) => {
+        this.showSpinner = true;
+        this.showLink2 = false;
+        this.showUnauthorized = false;
         console.log("Login attempt: " + user.username + ", " + user.password);
 
         this.authService.login(user).subscribe(
@@ -33,18 +37,17 @@ export class LoginComponent implements OnInit {
                 console.log("Successfully logged in!");
                 const jwt = response.headers.get('Authorization').substring(7);
                 console.log(jwt);
-                this.loginAttempts = 0;
                 this.authService.setJWT(jwt);
                 this.router.navigateByUrl('/');
             }, error => {
                 console.log("Login failed - Status " + error.status);
-                if(error.status == 0){  //self-signed certificate blocked
+                this.showSpinner = false;
+                if (error.status == 0) {  //self-signed certificate blocked
                     this.showLink2 = true;
                 }
-                else{  //401 unauthorized
-                    this.loginForm.reset();
-                    this.loginAttempts++;
-                    this.showLink2 = false;
+                else {  //401 unauthorized
+                    this.showUnauthorized = true;
+                    // this.loginForm.reset();
                 }
             }
         );

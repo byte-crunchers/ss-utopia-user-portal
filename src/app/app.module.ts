@@ -19,6 +19,8 @@ import { HighlightDirective } from './shared/custom/highlight.directive';
 import { LoanTableComponent } from './loantable/loantable.component';
 import { LoginComponent } from './login/login.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
     declarations: [
@@ -41,7 +43,9 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MatProgressSpinnerModule
     ],
     providers: [
         HttpService,

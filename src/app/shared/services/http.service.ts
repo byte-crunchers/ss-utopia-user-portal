@@ -9,10 +9,14 @@ export class HttpService {
     constructor(private http: HttpClient) { }
 
     getAll(url: any) {
-        return this.http.get(url);
+        let headers: HttpHeaders = new HttpHeaders();
+        headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('jwt'));
+
+        // console.log("Attemping to send jwt...");
+
+        return this.http.get(url, {
+            headers: headers
+        });
     }
 
-    deleteById(url: any) {
-        return this.http.delete(url);
-    }
 }

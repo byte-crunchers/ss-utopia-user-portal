@@ -9,6 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
 
     name = "";
+    loginUrl = `${environment.LOGIN_URL}`;
 
     constructor(
         private http: HttpClient,
@@ -16,7 +17,7 @@ export class AuthService {
     ) { }
 
     login(user: any) {
-        return this.http.post(`${environment.LOGIN_URL}`, JSON.stringify(user), { observe: 'response' })
+        return this.http.post(this.loginUrl, JSON.stringify(user), { observe: 'response' })
     }
 
     setJWT(jwt: string) {

@@ -30,19 +30,22 @@
                     <a class="btn btn-secondary my-2">Register</a>
 
                 </form>
+                <br>
+
+                <div *ngIf="this.showSpinner">
+                    <mat-spinner diameter="45"></mat-spinner>
+                </div>
 
                 <div *ngIf="this.showLink2">
                     <small class="text-muted">
-                        <br>
                         Login failed: Self-signed certificate blocked.<br>
-                        <a target="_blank" href="https://34.238.82.58:8443/">Click this link,</a> accept the sketchy
+                        <a target="_blank" href="{{authService.loginUrl}}">Click this link,</a> accept the sketchy
                         certificate, and try again.
                     </small>
                 </div>
 
-                <div *ngIf="this.loginAttempts > 0">
+                <div *ngIf="this.showUnauthorized">
                     <small class="text-muted">
-                        <br>
                         Login failed: Incorrect username or password<br>
                         Hint: dan / dan123
                     </small>
