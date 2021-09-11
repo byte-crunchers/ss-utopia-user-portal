@@ -8,11 +8,10 @@ export class HttpService {
 
     constructor(private http: HttpClient) { }
 
+    // this adds JWT to the header of all GET requests
     getAll(url: any) {
         let headers: HttpHeaders = new HttpHeaders();
         headers = headers.append('Authorization', 'Bearer ' + localStorage.getItem('jwt'));
-
-        // console.log("Attemping to send jwt...");
 
         return this.http.get(url, {
             headers: headers

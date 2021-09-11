@@ -36,18 +36,20 @@ export class LoginComponent implements OnInit {
             (response: any) => {
                 console.log("Successfully logged in!");
                 const jwt = response.headers.get('Authorization').substring(7);
-                console.log(jwt);
+                // console.log(jwt);
                 this.authService.setJWT(jwt);
                 this.router.navigateByUrl('/');
             }, error => {
                 console.log("Login failed - Status " + error.status);
                 this.showSpinner = false;
-                if (error.status == 0) {  //self-signed certificate blocked
+
+                if (error.status == 0) {
+                    // self-signed certificate blocked
                     this.showLink2 = true;
                 }
-                else {  //401 unauthorized
+                else {
+                    // 401 unauthorized
                     this.showUnauthorized = true;
-                    // this.loginForm.reset();
                 }
             }
         );

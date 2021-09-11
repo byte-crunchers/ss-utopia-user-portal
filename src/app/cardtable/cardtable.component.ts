@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validator, FormGroup, Validators } from '@angular/forms';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { HttpService } from 'src/app/shared/services/http.service';
 import { environment } from 'src/environments/environment';
 
@@ -13,9 +11,7 @@ import { environment } from 'src/environments/environment';
 export class CardTableComponent implements OnInit {
 
     constructor(
-        private httpService: HttpService,
-        private modalService: NgbModal,
-        private fb: FormBuilder
+        private httpService: HttpService
     ) { }
     cards: any;
     totalCards = 0;

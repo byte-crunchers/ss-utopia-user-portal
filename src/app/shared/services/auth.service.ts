@@ -8,7 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-    name = "";
+    name = "";  // user profile name, printed next to the logout button
     loginUrl = `${environment.LOGIN_URL}`;
 
     constructor(
@@ -20,10 +20,12 @@ export class AuthService {
         return this.http.post(this.loginUrl, JSON.stringify(user), { observe: 'response' })
     }
 
+    // JWT is stored on the client side in local storage
     setJWT(jwt: string) {
         localStorage.setItem('jwt', jwt);
     }
 
+    // log out by removing the JWT
     logout() {
         localStorage.removeItem('jwt');
     }
