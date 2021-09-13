@@ -4,7 +4,7 @@ pipeline {
     stages {
       stage('checkout') {
         steps {
-          git branch: 'feature/feature_branch', credentialsId: 'git_login', url: 'https://github.com/byte-crunchers/ss-utopia-user-portal.git'
+          git branch: 'feature_jenkins', credentialsId: 'git_login', url: 'https://github.com/byte-crunchers/ss-utopia-user-portal.git'
         }
       }
         
@@ -21,7 +21,7 @@ pipeline {
           stage('Build') {
             steps {
                   
-                    sh 'docker build . -t jbnilles/ss-utopia-user_portal:latest'
+                    sh 'docker build . -t jbnilles/ss-utopia-user-portal:latest'
 
                  
             }
@@ -29,7 +29,7 @@ pipeline {
           
         stage('Deploy') {
             steps {
-                sh 'docker push jbnilles/ss-utopia-user_portal:latest'
+                sh 'docker push jbnilles/ss-utopia-user-portal:latest'
             }
         }
     }
