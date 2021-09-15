@@ -1,0 +1,61 @@
+<main>
+    <section class="py-5 container">
+        <div class="row text-center py-lg-5">
+            <div class="col-lg-10 mx-auto">
+                <h1 class="fw-light">Utopia Financial</h1>
+                <p class="lead text-muted">Customer Login</p>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-8 mx-auto">
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="username" class="form-control" id="username" type="text"
+                            formControlName="username">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" type="password"
+                            formControlName="password">
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">Login</button>
+                    &nbsp;
+                    <a class="btn btn-secondary my-2">Register</a>
+
+                </form>
+                <br>
+
+                <div *ngIf="this.showSpinner">
+                    <mat-spinner diameter="45"></mat-spinner>
+                </div>
+
+                <div *ngIf="this.showLink2">
+                    <small class="text-muted">
+                        Login failed: Self-signed certificate blocked.<br>
+                        <a target="_blank" href="{{authService.loginUrl}}">Click this link,</a> accept the sketchy
+                        certificate, and try again.
+                    </small>
+                </div>
+
+                <div *ngIf="this.showUnauthorized">
+                    <small class="text-muted">
+                        Login failed: Incorrect username or password<br>
+                        Hint: dan / dan123
+                    </small>
+                </div>
+
+            </div>
+        </div>
+
+        <br><br>
+
+    </section>
+
+</main>

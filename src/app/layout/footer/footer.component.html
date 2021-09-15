@@ -1,0 +1,16 @@
+<footer class="text-muted py-5">
+    <div class="container">
+
+        <div *ngIf="this.router.url.indexOf('/login') === -1">
+            <p class="float-end mb-1">
+                <a routerLink="/">Home</a> | <a routerLink="/cards">Cards</a> | <a routerLink="/loans">Loans</a> | <a
+                    routerLink="/investing">Investing</a>
+            </p>
+        </div>
+
+        <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
+        <p class="mb-0">New to Bootstrap? <a routerLink="/">Visit the homepage</a> or read our <a routerLink="/">getting
+                started guide</a>.</p>
+
+    </div>
+</footer>

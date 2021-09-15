@@ -1,0 +1,47 @@
+<main>
+    <section class="py-5 container">
+        <div class="row py-lg-5 text-center">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">Utopia Financial</h1>
+                <p class="lead text-muted">Compare Loans</p>
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col">
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Loan Type</th>
+                            <th scope="col">Sample Principal</th>
+                            <th scope="col">Installment Payments</th>
+                            <th scope="col">Term</th>
+                            <th scope="col">Interest Rate</th>
+                            <th scope="col">Secured</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let x of loans; let i=index">
+                            <td>{{x.loanName}}</td>
+                            <td>${{x.principal | number:'1.0'}}</td>
+                            <td>${{x.installmentPayments | number:'1.0'}}/mo</td>
+                            <td>{{x.yrsTerms}} years</td>
+                            <td>{{x.interestRate | percent:'1.0-5'}}</td>
+                            <td>{{x.isSecured | yesNo}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br><br>
+                <p class="text-center">
+                    <a routerLink="/loans" class="btn btn-primary my-2">Back to Loans</a>
+                </p>
+
+            </div>
+        </div>
+
+    </section>
+
+</main>
