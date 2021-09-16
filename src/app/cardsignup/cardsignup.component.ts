@@ -22,7 +22,7 @@ export class CardSignupComponent implements OnInit {
 
     cards: any;
     images = ["red_card.png", "orange_card.png", "plat_card.png", "blue_card.png", "white_card.png"];
-    cardType = -1;
+    cardType = 0;
     card: any;  //currently selected card
 
     //define validators for each field
@@ -51,6 +51,8 @@ export class CardSignupComponent implements OnInit {
         //get choice from querystring
         this.route.queryParams.subscribe(params => {
             this.cardType = params['type'];
+            if (this.cardType == null)
+                this.cardType = 1;
             this.cards = [];
             this.loadAllCards();
         });

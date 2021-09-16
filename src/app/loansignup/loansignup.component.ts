@@ -22,7 +22,7 @@ export class LoanSignupComponent implements OnInit {
 
     loans: any;
     images = ["mortgage.jpg", "auto_loan.jpg", "student_loan.png", "personal_loan.jpg", "payday_loan.jpg"];
-    loanType = -1;
+    loanType = 0;
     loan: any;  //currently selected loan
     result = 0;  //calculator result
     calcError = false;
@@ -54,6 +54,8 @@ export class LoanSignupComponent implements OnInit {
         //get choice from querystring
         this.route.queryParams.subscribe(params => {
             this.loanType = params['type'];
+            if (this.loanType == null)
+                this.loanType = 0;
             this.loans = [];
             this.loadAllLoans();
         });
@@ -69,10 +71,12 @@ export class LoanSignupComponent implements OnInit {
     //calculate loan monthly payment
     calculate(fields: any) {
         try {
-            let p = fields.principal;
-            let t = fields.term;
-            let i = this.loan.interestRate;
-            this.result = p * Math.pow((1 + i), t) / (t * 12);
+            let p = fields.principal;  //loan amount
+            let t = fields.term;  //years
+            let r = this.loan.interestRate;  //monthly rate
+            let e = Math.pow(1 + r, t * 12);
+
+            this.result = p * r * e / (e - 1);  //monthly payment
             this.calcError = false;
         }
         catch (error) {

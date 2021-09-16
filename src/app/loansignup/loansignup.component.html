@@ -8,11 +8,8 @@
                     <h1>Loan Application</h1>
                     <br>
                     <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each
-                        required
-                        form
-                        group has a validation state that can be triggered by attempting to submit the form without
-                        completing
-                        it.</p>
+                        required form group has a validation state that can be triggered by attempting to submit the
+                        form without completing it.</p>
                     <img class="d-block mx-auto mb-4" src="/assets/{{images[loanType]}}">
                     <h2>&nbsp;{{loan.loanName}}&nbsp;</h2>
                 </div>
@@ -59,7 +56,7 @@
                         <div class="col-sm-12 text-center">
                             <br>
                             <h1>${{result | number:'1.0-0'}} / mo</h1>
-                            <h5>{{loan.interestRate | percent:'1.0-5'}} APR</h5>
+                            <h5>{{loan.interestRate | apr | percent:'1.0-2'}} APR</h5>
                         </div>
                     </div>
 

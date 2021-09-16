@@ -16,6 +16,7 @@ import { HttpService } from './shared/services/http.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YesNoPipe } from './shared/custom/usort.pipe';
 import { HighlightDirective } from './shared/custom/highlight.directive';
+import { AprPipe } from './shared/custom/apr.pipe';
 import { LoanTableComponent } from './loantable/loantable.component';
 import { LoginComponent } from './login/login.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
@@ -40,6 +41,7 @@ import { LoanApprovedComponent } from './loanapproved/loanapproved.component';
         FooterComponent,
         YesNoPipe,
         HighlightDirective,
+        AprPipe,
         LoanTableComponent,
         LoginComponent,
         CardSignupComponent,
