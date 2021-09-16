@@ -14,8 +14,6 @@ export class HeaderComponent implements OnInit {
         public router: Router
     ) { }
 
-    pageTitle = "Utopia";
-
     logout(): void {
         this.authService.logout();
         console.log('Logged out - JWT deleted.');

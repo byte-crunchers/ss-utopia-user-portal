@@ -14,11 +14,13 @@ export class CardsComponent implements OnInit {
         private httpService: HttpService,
         private modalService: NgbModal,
     ) { }
+
     cards: any;
     modalHeader = "";
     modalImage = "";
     modalInfo: any;
     images = ["red_card.png", "orange_card.png", "plat_card.png", "blue_card.png", "white_card.png"];
+    index = [1, 2, 3, 0, 4];  //display order
 
     //modal variables
     modalRef!: NgbModalRef;

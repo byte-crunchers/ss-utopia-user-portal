@@ -19,6 +19,7 @@ export class LoansComponent implements OnInit {
     modalImage = "";
     modalInfo: any;
     images = ["mortgage.jpg", "auto_loan.jpg", "student_loan.png", "personal_loan.jpg", "payday_loan.jpg"];
+    index = [0, 1, 2, 3, 4];  //display order
 
     //modal variables
     modalRef!: NgbModalRef;
