@@ -24,9 +24,9 @@
 
                             <div class="card-body">
                                 <h4>{{loans[i].loanName}}</h4>
-                                <p class="card-text">Sample Principal: ${{loans[i].principal | number:'1.0'}}
-                                    <br>Monthly Payments: ${{loans[i].installmentPayments | number:'1.0'}} / month
+                                <p class="card-text">Term length: {{loans[i].yrsTerms}} years
                                     <br>APR: {{loans[i].interestRate | apr | percent:'1.0-2'}}
+                                    <br>Secured: {{loans[i].isSecured | yesNo}}
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">

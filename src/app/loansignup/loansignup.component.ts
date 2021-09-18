@@ -26,22 +26,21 @@ export class LoanSignupComponent implements OnInit {
     loan: any;  //currently selected loan
     result = 0;  //calculator result
     calcError = false;
+    showSpinner = false;
 
-    calcForm = this.fb.group({
-    });
-
-    //define validators for each field
+    //define form field validators
     signupForm = this.fb.group({
-        principal: ['', Validators.required],
-        term: ['', Validators.required],
+        loanType: [''],  //hidden field for POST
+        principal: ['', [Validators.required, Validators.pattern(/^[\d\.]+$/)]],
+        term: ['', [Validators.required, Validators.pattern(/^[\d\.]+$/)]],
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        phone: ['', [Validators.required, Validators.minLength(10)]],
+        email: ['', [Validators.required, Validators.pattern(/^.+@.+\..+$/)]],
+        phone: ['', [Validators.required, Validators.pattern(/^(\()?\d{3}(\))?[\s-]?\d{3}[\s-]?\d{4}$/)]],
     });
 
     //display error message if the field has been touched & fails validator checks
-    isInvalid(field: string): boolean {
+    showError(field: string): boolean {
         let x = this.signupForm.get(field);
         if (x && x.invalid && (x.dirty || x.touched))
             return true;
@@ -58,6 +57,7 @@ export class LoanSignupComponent implements OnInit {
                 this.loanType = 0;
             this.loans = [];
             this.loadAllLoans();
+            this.signupForm.patchValue({ loanType: this.loanType });
         });
     }
 
@@ -65,10 +65,10 @@ export class LoanSignupComponent implements OnInit {
         this.httpService.getAll(`${environment.BASE_PAI_URL}${environment.LOANS_GET_URL}`).subscribe((res) => {
             this.loans = res;
             this.loan = this.loans[this.loanType];
-        })
+        });
     }
 
-    //calculate loan monthly payment
+    //calculate button
     calculate(fields: any) {
         try {
             let p = fields.principal;  //loan amount
@@ -85,7 +85,7 @@ export class LoanSignupComponent implements OnInit {
             this.result = 0;
         }
 
-        //additional validation
+        //additional validation on output
         if (this.result < 0 || typeof this.result !== 'number' || !isFinite(this.result)) {
             this.calcError = true;
             this.result = 0;
@@ -94,8 +94,17 @@ export class LoanSignupComponent implements OnInit {
 
     //submit button
     submit(fields: any) {
-        console.log('Loan signup form submitted.');
-        this.router.navigateByUrl('/loans/approved');
+        console.log('Submitting loan signup form...');
+        this.showSpinner = true;
+
+        this.httpService.postForm(`${environment.BASE_PAI_URL}${environment.LOANS_POST_URL}`, fields).subscribe(
+            (response: any) => {
+                console.log("Form saved successfully!");
+                this.router.navigateByUrl('/loans/approved');
+            }, error => {
+                console.log("Form submit failed - Status " + error.status);
+            }
+        );
     }
 
     //enable submit button when all fields are valid

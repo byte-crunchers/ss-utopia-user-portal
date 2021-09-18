@@ -1,5 +1,10 @@
 # ss-utopia-user-portal
-Customer Portal using Angular
+
+### Utopia Financial - Customer Portal:
+- Angular 12
+- Bootstrap 5.1
+
+---
 
 ### Website structure:
 

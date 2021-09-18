@@ -24,21 +24,24 @@ export class CardSignupComponent implements OnInit {
     images = ["red_card.png", "orange_card.png", "plat_card.png", "blue_card.png", "white_card.png"];
     cardType = 0;
     card: any;  //currently selected card
+    showSpinner = false;
 
-    //define validators for each field
+    //define form field validators
     signupForm = this.fb.group({
+        cardType: [''],  //hidden field for POST
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         address: ['', Validators.required],
+        address2: [''],  //optional field
         city: ['', Validators.required],
         state: ['', Validators.required],
-        zip: ['', [Validators.required, Validators.minLength(5)]],
-        email: ['', [Validators.required, Validators.email]],
-        phone: ['', [Validators.required, Validators.minLength(10)]],
+        zip: ['', [Validators.required, Validators.pattern(/^\d{5}$/)]],
+        email: ['', [Validators.required, Validators.pattern(/^.+@.+\..+$/)]],
+        phone: ['', [Validators.required, Validators.pattern(/^(\()?\d{3}(\))?[\s-]?\d{3}[\s-]?\d{4}$/)]],
     });
 
     //display error message if the field has been touched & fails validator checks
-    isInvalid(field: string): boolean {
+    showError(field: string): boolean {
         let x = this.signupForm.get(field);
         if (x && x.invalid && (x.dirty || x.touched))
             return true;
@@ -55,6 +58,7 @@ export class CardSignupComponent implements OnInit {
                 this.cardType = 1;
             this.cards = [];
             this.loadAllCards();
+            this.signupForm.patchValue({ cardType: this.cardType });
         });
     }
 
@@ -62,13 +66,22 @@ export class CardSignupComponent implements OnInit {
         this.httpService.getAll(`${environment.BASE_PAI_URL}${environment.CARDS_GET_URL}`).subscribe((res) => {
             this.cards = res;
             this.card = this.cards[this.cardType];
-        })
+        });
     }
 
     //submit form
     onSubmit = (fields: any) => {
-        console.log('Card signup form submitted.');
-        this.router.navigateByUrl('/cards/approved');
+        console.log('Submitting card signup form...');
+        this.showSpinner = true;
+
+        this.httpService.postForm(`${environment.BASE_PAI_URL}${environment.CARDS_POST_URL}`, fields).subscribe(
+            (response: any) => {
+                console.log("Form saved successfully!");
+                this.router.navigateByUrl('/cards/approved');
+            }, error => {
+                console.log("Form submit failed - Status " + error.status);
+            }
+        );
     };
 
     //enable submit button when all fields are valid

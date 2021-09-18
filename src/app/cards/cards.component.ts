@@ -40,7 +40,7 @@ export class CardsComponent implements OnInit {
     loadAllCards() {
         this.httpService.getAll(`${environment.BASE_PAI_URL}${environment.CARDS_GET_URL}`).subscribe((res) => {
             this.cards = res;
-        })
+        });
     }
 
     closeModal() {

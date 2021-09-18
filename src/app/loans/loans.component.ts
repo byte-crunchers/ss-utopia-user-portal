@@ -39,7 +39,7 @@ export class LoansComponent implements OnInit {
     loadAllLoans() {
         this.httpService.getAll(`${environment.BASE_PAI_URL}${environment.LOANS_GET_URL}`).subscribe((res) => {
             this.loans = res;
-        })
+        });
     }
 
     closeModal() {
