@@ -63,7 +63,7 @@ export class CardSignupComponent implements OnInit {
     }
 
     loadAllCards() {
-        this.httpService.getAll(`${environment.BASE_PAI_URL}${environment.CARDS_GET_URL}`).subscribe((res) => {
+        this.httpService.getAll(`${environment.CARDS_URL}`).subscribe((res) => {
             this.cards = res;
             this.card = this.cards[this.cardType];
         });
@@ -74,7 +74,7 @@ export class CardSignupComponent implements OnInit {
         console.log('Submitting card signup form...');
         this.showSpinner = true;
 
-        this.httpService.postForm(`${environment.BASE_PAI_URL}${environment.CARDS_POST_URL}`, fields).subscribe(
+        this.httpService.postForm(`${environment.CARDS_URL}` + '/form', fields).subscribe(
             (response: any) => {
                 console.log("Form saved successfully!");
                 this.router.navigateByUrl('/cards/approved');

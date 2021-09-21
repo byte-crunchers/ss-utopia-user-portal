@@ -37,7 +37,7 @@ export class LoansComponent implements OnInit {
     }
 
     loadAllLoans() {
-        this.httpService.getAll(`${environment.BASE_PAI_URL}${environment.LOANS_GET_URL}`).subscribe((res) => {
+        this.httpService.getAll(`${environment.LOANS_URL}`).subscribe((res) => {
             this.loans = res;
         });
     }
@@ -55,7 +55,7 @@ export class LoansComponent implements OnInit {
         this.modalInfo[1] = this.loans[i].installmentPayments;
         this.modalInfo[2] = this.loans[i].yrsTerms;
         this.modalInfo[3] = this.loans[i].interestRate;
-        this.modalInfo[4] = this.loans[i].isSecured;
+        this.modalInfo[4] = this.loans[i].secured;
 
         this.modalRef = this.modalService.open(content);
         this.modalRef.result.then(

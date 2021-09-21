@@ -62,7 +62,7 @@ export class LoanSignupComponent implements OnInit {
     }
 
     loadAllLoans() {
-        this.httpService.getAll(`${environment.BASE_PAI_URL}${environment.LOANS_GET_URL}`).subscribe((res) => {
+        this.httpService.getAll(`${environment.LOANS_URL}`).subscribe((res) => {
             this.loans = res;
             this.loan = this.loans[this.loanType];
         });
@@ -97,7 +97,7 @@ export class LoanSignupComponent implements OnInit {
         console.log('Submitting loan signup form...');
         this.showSpinner = true;
 
-        this.httpService.postForm(`${environment.BASE_PAI_URL}${environment.LOANS_POST_URL}`, fields).subscribe(
+        this.httpService.postForm(`${environment.LOANS_URL}` + '/form', fields).subscribe(
             (response: any) => {
                 console.log("Form saved successfully!");
                 this.router.navigateByUrl('/loans/approved');

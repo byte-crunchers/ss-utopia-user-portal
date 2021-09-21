@@ -22,7 +22,7 @@ export class CardTableComponent implements OnInit {
     }
 
     loadAllCards() {
-        this.httpService.getAll(`${environment.BASE_PAI_URL}${environment.CARDS_GET_URL}`).subscribe((res) => {
+        this.httpService.getAll(`${environment.CARDS_URL}`).subscribe((res) => {
             this.cards = res;
             this.totalCards = this.cards.length;
         })

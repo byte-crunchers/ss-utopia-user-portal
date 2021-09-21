@@ -12,7 +12,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
 
     name = "";  // user profile name, printed in website header
-    loginUrl = `${environment.LOGIN_URL}`;
+    loginUrl = `${environment.AUTH_URL}`;
 
     constructor(
         private http: HttpClient,
