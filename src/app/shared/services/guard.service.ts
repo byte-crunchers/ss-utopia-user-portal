@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
+/* prevents user from accessing routes when not logged in
+*/
+
 @Injectable({
     providedIn: 'root'
 })

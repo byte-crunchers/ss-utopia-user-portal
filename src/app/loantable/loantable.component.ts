@@ -22,7 +22,7 @@ export class LoanTableComponent implements OnInit {
     }
 
     loadAllLoans() {
-        this.httpService.getAll(`${environment.BASE_PAI_URL}${environment.LOANS_GET_URL}`).subscribe((res) => {
+        this.httpService.getAll(`${environment.LOANS_URL}`).subscribe((res) => {
             this.loans = res;
             this.totalLoans = this.loans.length;
         })

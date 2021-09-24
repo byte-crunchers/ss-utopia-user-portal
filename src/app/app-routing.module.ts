@@ -9,6 +9,10 @@ import { LoansComponent } from './loans/loans.component';
 import { LoanTableComponent } from './loantable/loantable.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './shared/services/guard.service';
+import { CardSignupComponent } from './cardsignup/cardsignup.component';
+import { CardApprovedComponent } from './cardapproved/cardapproved.component';
+import { LoanSignupComponent } from './loansignup/loansignup.component';
+import { LoanApprovedComponent } from './loanapproved/loanapproved.component';
 
 const routes: Routes = [
     {
@@ -30,23 +34,43 @@ const routes: Routes = [
                 canActivate: [AuthGuardService]
             },
             {
-                path: 'loans',
-                component: LoansComponent,
-                canActivate: [AuthGuardService]
-            },
-            {
-                path: 'investing',
-                component: StocksComponent,
-                canActivate: [AuthGuardService]
-            },
-            {
                 path: 'cards/table',
                 component: CardTableComponent,
                 canActivate: [AuthGuardService]
             },
             {
+                path: 'cards/signup',
+                component: CardSignupComponent,
+                canActivate: [AuthGuardService]
+            },
+            {
+                path: 'cards/approved',
+                component: CardApprovedComponent,
+                canActivate: [AuthGuardService]
+            },
+            {
+                path: 'loans',
+                component: LoansComponent,
+                canActivate: [AuthGuardService]
+            },
+            {
                 path: 'loans/table',
                 component: LoanTableComponent,
+                canActivate: [AuthGuardService]
+            },
+            {
+                path: 'loans/signup',
+                component: LoanSignupComponent,
+                canActivate: [AuthGuardService]
+            },
+            {
+                path: 'loans/approved',
+                component: LoanApprovedComponent,
+                canActivate: [AuthGuardService]
+            },
+            {
+                path: 'investing',
+                component: StocksComponent,
                 canActivate: [AuthGuardService]
             },
             {  //redirect invalid urls to home page
@@ -57,8 +81,12 @@ const routes: Routes = [
     }
 ];
 
+
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    //when a new page is loaded, auto scroll to top
+    imports: [
+        RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })
+    ],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

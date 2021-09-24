@@ -15,24 +15,26 @@
                     <thead>
                         <tr>
                             <th scope="col">Loan Type</th>
-                            <th scope="col">Sample Principal</th>
-                            <th scope="col">Installment Payments</th>
-                            <th scope="col">Term</th>
-                            <th scope="col">Interest Rate</th>
+                            <th scope="col">Minimum APR</th>
+                            <th scope="col">Maximum APR</th>
+                            <th scope="col">Late Fee</th>
                             <th scope="col">Secured</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let x of loans; let i=index">
                             <td>{{x.loanName}}</td>
-                            <td>${{x.principal | number:'1.0'}}</td>
-                            <td>${{x.installmentPayments | number:'1.0'}}/mo</td>
-                            <td>{{x.yrsTerms}} years</td>
-                            <td>{{x.interestRate | percent:'1.0-5'}}</td>
-                            <td>{{x.isSecured | yesNo}}</td>
+                            <td>{{x.lowerRange | apr | percent:'1.0-5'}}</td>
+                            <td>{{x.upperRange | apr | percent:'1.0-5'}}</td>
+                            <td>${{x.lateFee}}</td>
+                            <td>{{x.secured | yesNo}}</td>
                         </tr>
                     </tbody>
                 </table>
+
+                <div *ngIf="this.totalLoans == 0">
+                    <mat-spinner diameter="55" style="margin:0 auto;"></mat-spinner>
+                </div>
 
                 <br><br>
                 <p class="text-center">
