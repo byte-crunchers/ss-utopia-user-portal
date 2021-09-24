@@ -14,6 +14,10 @@
 
 ![card_form](https://user-images.githubusercontent.com/87076278/134111248-f21d43c9-e2ed-4de9-87bc-2934376b4a35.png)
 
+![loans](https://user-images.githubusercontent.com/87076278/134605708-db5fb0e7-3b1c-4e3c-b9fc-5329ad671bd9.png)
+
+![loan_form](https://user-images.githubusercontent.com/87076278/134605720-dc06ad3a-52f1-4c9e-9eb2-baa6926b2678.png)
+
 
 ### Website structure:
 
