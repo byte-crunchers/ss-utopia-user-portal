@@ -4,6 +4,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoansComponent } from './loans.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { AprPipe } from '../shared/custom/apr.pipe';
+import { YesNoPipe } from '../shared/custom/usort.pipe';
 
 describe('LoansComponent', () => {
     let component: LoansComponent;
@@ -14,7 +16,11 @@ describe('LoansComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [LoansComponent],
+            declarations: [
+                LoansComponent,
+                AprPipe,
+                YesNoPipe
+            ],
             imports: [
                 HttpClientModule,
                 HttpClientTestingModule,

@@ -24,8 +24,9 @@
 
                             <div class="card-body">
                                 <h4>{{loans[i].loanName}}</h4>
-                                <p class="card-text">Term length: {{loans[i].yrsTerms}} years
-                                    <br>APR: {{loans[i].interestRate | apr | percent:'1.0-2'}}
+                                <p class="card-text">APR Range: {{loans[i].lowerRange | apr | percent:'1.0-2'}} -
+                                    {{loans[i].upperRange | apr | percent:'1.0-2'}}
+                                    <br>Late Fee: ${{loans[i].lateFee}}
                                     <br>Secured: {{loans[i].secured | yesNo}}
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -61,9 +62,12 @@
             <div class="modal-body">
                 <h4 class="modal-title">{{modalHeader}}</h4><br>
 
-                <p>Sample Principal: ${{modalInfo[0] | number:'1.0'}} <br>Monthly Payments: ${{modalInfo[1] |
-                    number:'1.0'}} / month <br>Term: {{modalInfo[2]}} years<br>
-                    APR: {{modalInfo[3] | apr | percent:'1.0-2'}} <br>Secured: {{modalInfo[4] | yesNo}} </p>
+                <p>
+                    Maximum APR: {{modalInfo[0] | apr | percent:'1.0-2'}}
+                    <br>Minimum APR: {{modalInfo[1] | apr | percent:'1.0-2'}}
+                    <br>Late Fee: ${{modalInfo[2]}}
+                    <br>Secured: {{modalInfo[3] | yesNo}}
+                </p>
 
             </div>
             <div class="modal-footer">

@@ -22,7 +22,7 @@ export class CardSignupComponent implements OnInit {
 
     cards: any;
     images = ["red_card.png", "orange_card.png", "plat_card.png", "blue_card.png", "white_card.png"];
-    cardType = 0;
+    cardTypeId = 0;
     card: any;  //currently selected card
     showSpinner = false;
 
@@ -53,19 +53,19 @@ export class CardSignupComponent implements OnInit {
 
         //get choice from querystring
         this.route.queryParams.subscribe(params => {
-            this.cardType = params['type'];
-            if (this.cardType == null)
-                this.cardType = 1;
+            this.cardTypeId = params['type'];
+            if (this.cardTypeId == null)
+                this.cardTypeId = 1;
             this.cards = [];
             this.loadAllCards();
-            this.signupForm.patchValue({ cardType: this.cardType });
         });
     }
 
     loadAllCards() {
         this.httpService.getAll(`${environment.CARDS_URL}`).subscribe((res) => {
             this.cards = res;
-            this.card = this.cards[this.cardType];
+            this.card = this.cards[this.cardTypeId];
+            this.signupForm.patchValue({ cardType: this.card.cardName });
         });
     }
 

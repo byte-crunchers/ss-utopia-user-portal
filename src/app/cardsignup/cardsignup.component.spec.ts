@@ -1,25 +1,41 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpService } from 'src/app/shared/services/http.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CardSignupComponent } from './cardsignup.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
-import { CardsignupComponent } from './cardsignup.component';
+describe('CardSignupComponent', () => {
+    let component: CardSignupComponent;
+    let fixture: ComponentFixture<CardSignupComponent>;
+    let service: HttpService;
+    let httpSer: HttpClient;
 
-describe('CardsignupComponent', () => {
-  let component: CardsignupComponent;
-  let fixture: ComponentFixture<CardsignupComponent>;
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [CardSignupComponent],
+            imports: [
+                HttpClientModule,
+                HttpClientTestingModule,
+                RouterTestingModule,
+                FormsModule,
+                ReactiveFormsModule
+            ],
+            providers: [HttpService],
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ CardsignupComponent ]
-    })
-    .compileComponents();
-  });
+        })
+            .compileComponents();
+        service = new HttpService(httpSer);
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CardsignupComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(CardSignupComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

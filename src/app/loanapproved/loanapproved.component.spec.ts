@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoanapprovedComponent } from './loanapproved.component';
+import { LoanApprovedComponent } from './loanapproved.component';
 
-describe('LoanapprovedComponent', () => {
-  let component: LoanapprovedComponent;
-  let fixture: ComponentFixture<LoanapprovedComponent>;
+describe('LoanApprovedComponent', () => {
+  let component: LoanApprovedComponent;
+  let fixture: ComponentFixture<LoanApprovedComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoanapprovedComponent ]
+      declarations: [ LoanApprovedComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoanapprovedComponent);
+    fixture = TestBed.createComponent(LoanApprovedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

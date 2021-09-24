@@ -51,11 +51,10 @@ export class LoansComponent implements OnInit {
         this.modalImage = this.images[i];
 
         this.modalInfo = [];
-        this.modalInfo[0] = this.loans[i].principal;
-        this.modalInfo[1] = this.loans[i].installmentPayments;
-        this.modalInfo[2] = this.loans[i].yrsTerms;
-        this.modalInfo[3] = this.loans[i].interestRate;
-        this.modalInfo[4] = this.loans[i].secured;
+        this.modalInfo[0] = this.loans[i].upperRange;
+        this.modalInfo[1] = this.loans[i].lowerRange;
+        this.modalInfo[2] = this.loans[i].lateFee;
+        this.modalInfo[3] = this.loans[i].secured;
 
         this.modalRef = this.modalService.open(content);
         this.modalRef.result.then(

@@ -22,17 +22,21 @@ export class LoanSignupComponent implements OnInit {
 
     loans: any;
     images = ["mortgage.jpg", "auto_loan.jpg", "student_loan.png", "personal_loan.jpg", "payday_loan.jpg"];
-    loanType = 0;
+    loanTypeId = 0;
     loan: any;  //currently selected loan
-    result = 0;  //calculator result
+    interestRate = 0;  //calculated monthly interest rate
+    result = 0;  //calculated monthly payment
     calcError = false;
     showSpinner = false;
 
     //define form field validators
     signupForm = this.fb.group({
-        loanType: [''],  //hidden field for POST
+        loanType: [''],  //hidden field
+        monthlyPayment: ['', Validators.required],  //calculated field
+        interestRate: ['', Validators.required],  //calculated field
         principal: ['', [Validators.required, Validators.pattern(/^[\d\.]+$/)]],
         term: ['', [Validators.required, Validators.pattern(/^[\d\.]+$/)]],
+        income: ['', [Validators.required, Validators.pattern(/^[\d\.]+$/)]],
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         email: ['', [Validators.required, Validators.pattern(/^.+@.+\..+$/)]],
@@ -52,19 +56,19 @@ export class LoanSignupComponent implements OnInit {
 
         //get choice from querystring
         this.route.queryParams.subscribe(params => {
-            this.loanType = params['type'];
-            if (this.loanType == null)
-                this.loanType = 0;
+            this.loanTypeId = params['type'];
+            if (this.loanTypeId == null)
+                this.loanTypeId = 0;
             this.loans = [];
             this.loadAllLoans();
-            this.signupForm.patchValue({ loanType: this.loanType });
         });
     }
 
     loadAllLoans() {
         this.httpService.getAll(`${environment.LOANS_URL}`).subscribe((res) => {
             this.loans = res;
-            this.loan = this.loans[this.loanType];
+            this.loan = this.loans[this.loanTypeId];
+            this.signupForm.patchValue({ loanType: this.loan.loanName });
         });
     }
 
@@ -73,11 +77,22 @@ export class LoanSignupComponent implements OnInit {
         try {
             let p = fields.principal;  //loan amount
             let t = fields.term;  //years
-            let r = this.loan.interestRate;  //monthly rate
+
+            //scale interest rate based on term length
+            if(t <= 30)
+                this.interestRate = this.loan.lowerRange + (this.loan.upperRange - this.loan.lowerRange) * (1 - t / 30);
+            else
+                this.interestRate = this.loan.lowerRange
+
+            let r = this.interestRate;  //monthly rate
             let e = Math.pow(1 + r, t * 12);
 
             this.result = p * r * e / (e - 1);  //monthly payment
             this.calcError = false;
+
+            //set hidden form fields
+            this.signupForm.patchValue({ monthlyPayment: this.result });
+            this.signupForm.patchValue({ interestRate: this.interestRate });
         }
         catch (error) {
             console.log(error);
