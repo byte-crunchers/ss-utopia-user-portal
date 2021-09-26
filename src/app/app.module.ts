@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -18,9 +17,11 @@ import { YesNoPipe } from './shared/custom/usort.pipe';
 import { HighlightDirective } from './shared/custom/highlight.directive';
 import { LoanTableComponent } from './loantable/loantable.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AccountsComponent } from './accounts/accounts.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         YesNoPipe,
         HighlightDirective,
         LoanTableComponent,
-        LoginComponent
+        LoginComponent,
+        RegisterComponent,
+        AccountsComponent
     ],
     imports: [
         BrowserModule,

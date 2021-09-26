@@ -8,6 +8,8 @@ import { LayoutComponent } from './layout/layout.component';
 import { LoansComponent } from './loans/loans.component';
 import { LoanTableComponent } from './loantable/loantable.component';
 import { LoginComponent } from './login/login.component';
+import { AccountsComponent } from './accounts/accounts.component';
+import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './shared/services/guard.service';
 
 const routes: Routes = [
@@ -25,6 +27,10 @@ const routes: Routes = [
                 component: LoginComponent
             },
             {
+                path: 'register',
+                component: RegisterComponent
+            },
+            {
                 path: 'cards',
                 component: CardsComponent,
                 canActivate: [AuthGuardService]
@@ -37,6 +43,11 @@ const routes: Routes = [
             {
                 path: 'investing',
                 component: StocksComponent,
+                canActivate: [AuthGuardService]
+            },
+            {
+                path: 'accounts',
+                component: AccountsComponent,
                 canActivate: [AuthGuardService]
             },
             {
