@@ -38,7 +38,7 @@ export class CardsComponent implements OnInit {
     }
 
     loadAllCards() {
-        this.httpService.getAll(`${environment.CARDS_URL}`).subscribe((res) => {
+        this.httpService.getAll(`${environment.CARD_TYPES_URL}`).subscribe((res) => {
             this.cards = res;
         });
     }

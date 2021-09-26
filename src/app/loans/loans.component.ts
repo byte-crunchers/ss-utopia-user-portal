@@ -37,7 +37,7 @@ export class LoansComponent implements OnInit {
     }
 
     loadAllLoans() {
-        this.httpService.getAll(`${environment.LOANS_URL}`).subscribe((res) => {
+        this.httpService.getAll(`${environment.LOAN_TYPES_URL}`).subscribe((res) => {
             this.loans = res;
         });
     }
