@@ -1,0 +1,68 @@
+<main>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">Utopia Financial</h1>
+                <p class="lead text-muted">View Available Accounts</p>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col" *ngFor="let account of accounts; let i = index">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h4>{{account.id}}</h4>
+                            <p class="card-text">
+                              Interest: {{account.interest}}%
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary"
+                                        (click)="openModal(infoModal, account)">More Info</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Sign Up</button>
+                                </div>
+                                <small class="text-muted"></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<ng-template #infoModal let-c="close" let-d="dismiss">
+
+    <div class="modal-dialog">
+        <p class="text-center">Account Details</p>
+
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4 class="modal-title">{{modalAccount.id}}</h4><br>
+                <p>
+                  Interest Rate: {{modalAccount.interest}}%
+                  <br>
+                  Annual Fee: ${{modalAccount.annualFee}}
+                  <br>
+                  Foodie Points: {{modalAccount.foodiePoints}}%
+                  <br>
+                  Cash Back: {{modalAccount.cashBack}}%
+                  <br>
+                  Late Fee: ${{modalAccount.lateFee}}
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">
+                    Close
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+</ng-template>
