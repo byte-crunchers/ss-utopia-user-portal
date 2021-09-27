@@ -1,40 +1,36 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpService } from 'src/app/shared/services/http.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { LoansComponent } from './loans.component';
+import { CardSignupComponent } from './cardsignup.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { AprPipe } from '../shared/custom/apr.pipe';
-import { YesNoPipe } from '../shared/custom/usort.pipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
-describe('LoansComponent', () => {
-    let component: LoansComponent;
-    let fixture: ComponentFixture<LoansComponent>;
+describe('CardSignupComponent', () => {
+    let component: CardSignupComponent;
+    let fixture: ComponentFixture<CardSignupComponent>;
     let service: HttpService;
     let httpSer: HttpClient;
-    let modalService: NgbModal;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [
-                LoansComponent,
-                AprPipe,
-                YesNoPipe
-            ],
+            declarations: [CardSignupComponent],
             imports: [
                 HttpClientModule,
                 HttpClientTestingModule,
+                RouterTestingModule,
+                FormsModule,
+                ReactiveFormsModule
             ],
             providers: [HttpService],
+
         })
             .compileComponents();
         service = new HttpService(httpSer);
-        modalService = TestBed.get(NgbModal);
-        component = new LoansComponent(service, modalService);
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(LoansComponent);
+        fixture = TestBed.createComponent(CardSignupComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

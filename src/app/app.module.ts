@@ -15,6 +15,7 @@ import { HttpService } from './shared/services/http.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YesNoPipe } from './shared/custom/usort.pipe';
 import { HighlightDirective } from './shared/custom/highlight.directive';
+import { AprPipe } from './shared/custom/apr.pipe';
 import { LoanTableComponent } from './loantable/loantable.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -22,6 +23,11 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AccountsComponent } from './accounts/accounts.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CardSignupComponent } from './cardsignup/cardsignup.component';
+import { CardApprovedComponent } from './cardapproved/cardapproved.component';
+import { LoanSignupComponent } from './loansignup/loansignup.component';
+import { LoanApprovedComponent } from './loanapproved/loanapproved.component';
 
 @NgModule({
     declarations: [
@@ -36,10 +42,15 @@ import { AccountsComponent } from './accounts/accounts.component';
         FooterComponent,
         YesNoPipe,
         HighlightDirective,
+        AprPipe,
         LoanTableComponent,
         LoginComponent,
         RegisterComponent,
         AccountsComponent
+        CardSignupComponent,
+        CardApprovedComponent,
+        LoanSignupComponent,
+        LoanApprovedComponent
     ],
     imports: [
         BrowserModule,
@@ -48,7 +59,8 @@ import { AccountsComponent } from './accounts/accounts.component';
         FormsModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        NgbModule
     ],
     providers: [
         HttpService,

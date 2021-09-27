@@ -1,10 +1,11 @@
 <footer class="text-muted py-5">
     <div class="container">
 
-        <div *ngIf="this.router.url.indexOf('/login') === -1">
+        <!-- footer links can be viewed without login -->
+        <div>
             <p class="float-end mb-1">
-                <a routerLink="/">Home</a> | <a routerLink="/cards">Cards</a> | <a routerLink="/loans">Loans</a> | <a
-                    routerLink="/investing">Investing</a>
+                <a routerLink="/">Home</a> &middot; <a routerLink="/">Terms</a> &middot; <a routerLink="/">Privacy</a>
+                &middot; <a routerLink="/">Contact</a> &middot; <a routerLink="/">About</a>
             </p>
         </div>
 

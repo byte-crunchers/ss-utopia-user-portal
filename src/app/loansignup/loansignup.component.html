@@ -1,0 +1,144 @@
+<main class="bg-light">
+    <div class="container">
+
+        <div class="row g-5 justify-content-center">
+
+            <div class="py-5 col-lg-10 col-xl-8">
+                <div class="text-center">
+                    <h1>Loan Application</h1>
+                    <br>
+                    <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each
+                        required form group has a validation state that can be triggered by attempting to submit the
+                        form without completing it.</p>
+                    <img class="d-block mx-auto mb-4 shadow-sm" src="/assets/{{images[loanTypeId]}}">
+                    <h2>&nbsp;{{loan.loanName}}&nbsp;</h2>
+                </div>
+
+                <br>
+                <hr class="my-4">
+                <br>
+
+                <form [formGroup]="signupForm" class="needs-validation">
+
+                    <h4 class="mb-3">Calculate your monthly payment</h4>
+                    <div class="row g-3">
+                        <div class="col-sm-4">
+                            <label for="principal" class="form-label">Loan amount</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="text" class="form-control" id="principal" formControlName="principal">
+                            </div>
+                            <div *ngIf="showError('principal')" class="invalid-feedback">
+                                Valid amount is required.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label for="term" class="form-label">Term</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="term" formControlName="term">
+                                <span class="input-group-text">years</span>
+                            </div>
+                            <div *ngIf="showError('term')" class="invalid-feedback">
+                                Valid term is required.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <label class="form-label">&nbsp;</label><br>
+                            <button class="w-100 btn btn-primary" type="submit"
+                                (click)="calculate(signupForm.value)">Calculate</button>
+                            <div *ngIf="calcError" class="invalid-feedback">
+                                Invalid calculation.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 text-center">
+                            <br>
+                            <h1>${{result | number:'1.0-0'}} / mo</h1>
+                            <div *ngIf="result == 0; else aprBlock">
+                                <h5>{{loan.lowerRange | apr | percent:'1.0-2'}} - {{loan.upperRange | apr | percent:'1.0-2'}} APR</h5>
+                            </div>
+                            <ng-template #aprBlock>
+                                <h5>{{interestRate | apr | percent:'1.0-2'}} APR</h5>
+                            </ng-template>
+        
+                        </div>
+                    </div>
+
+                    <br>
+                    <hr class="my-4">
+                    <br>
+
+                    <h4 class="mb-3">Customer Information</h4>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="firstName" class="form-label">First name</label>
+                            <input type="text" class="form-control" id="firstName" formControlName="firstName"
+                                placeholder="">
+                            <div *ngIf="showError('firstName')" class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="lastName" class="form-label">Last name</label>
+                            <input type="text" class="form-control" id="lastName" formControlName="lastName"
+                                placeholder="">
+                            <div *ngIf="showError('lastName')" class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" formControlName="email"
+                                placeholder="you@example.com">
+                            <div *ngIf="showError('email')" class="invalid-feedback">
+                                Please enter a valid email address.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="phone" formControlName="phone"
+                                placeholder="555-555-5555">
+                            <div *ngIf="showError('phone')" class="invalid-feedback">
+                                Please enter a valid phone number.
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="income" class="form-label">Income</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="text" class="form-control" id="income" formControlName="income">
+                            </div>
+                            <div *ngIf="showError('income')" class="invalid-feedback">
+                                Valid income is required.
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br>
+                    <hr class="my-4">
+                    <br>
+
+                    <div *ngIf="!this.showSpinner; else elseBlock">
+                        <button class="w-100 btn btn-primary btn-lg" type="submit" [disabled]="!this.enableSubmit()"
+                            (click)="submit(signupForm.value)">Submit</button>
+                    </div>
+                    <ng-template #elseBlock>
+                        <mat-spinner diameter="55" style="margin:0 auto;"></mat-spinner>
+                    </ng-template>
+
+                </form>
+
+                <br><br>
+
+            </div>
+
+        </div>
+    </div>
+</main>

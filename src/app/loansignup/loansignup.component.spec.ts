@@ -1,40 +1,42 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpService } from 'src/app/shared/services/http.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { LoansComponent } from './loans.component';
+import { LoanSignupComponent } from './loansignup.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AprPipe } from '../shared/custom/apr.pipe';
 import { YesNoPipe } from '../shared/custom/usort.pipe';
 
-describe('LoansComponent', () => {
-    let component: LoansComponent;
-    let fixture: ComponentFixture<LoansComponent>;
+describe('LoanSignupComponent', () => {
+    let component: LoanSignupComponent;
+    let fixture: ComponentFixture<LoanSignupComponent>;
     let service: HttpService;
     let httpSer: HttpClient;
-    let modalService: NgbModal;
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [
-                LoansComponent,
+                LoanSignupComponent,
                 AprPipe,
                 YesNoPipe
             ],
             imports: [
                 HttpClientModule,
                 HttpClientTestingModule,
+                RouterTestingModule,
+                FormsModule,
+                ReactiveFormsModule
             ],
             providers: [HttpService],
+
         })
             .compileComponents();
         service = new HttpService(httpSer);
-        modalService = TestBed.get(NgbModal);
-        component = new LoansComponent(service, modalService);
     });
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(LoansComponent);
+        fixture = TestBed.createComponent(LoanSignupComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
