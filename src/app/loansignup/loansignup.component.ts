@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PhonePipe } from '../shared/custom/phone.pipe';
 
 @Component({
     selector: 'app-loansignup',
@@ -17,9 +18,11 @@ export class LoanSignupComponent implements OnInit {
         private httpService: HttpService,
         private route: ActivatedRoute,
         private fb: FormBuilder,
-        public router: Router
+        public router: Router,
+        private phonePipe: PhonePipe
     ) { }
 
+    user: any;  //user info
     loans: any;
     images = ["mortgage.jpg", "auto_loan.jpg", "student_loan.png", "personal_loan.jpg", "payday_loan.jpg"];
     loanTypeId = 0;
@@ -28,6 +31,7 @@ export class LoanSignupComponent implements OnInit {
     result = 0;  //calculated monthly payment
     calcError = false;
     showSpinner = false;
+    options: any  //term length choices
 
     //define form field validators
     signupForm = this.fb.group({
@@ -53,6 +57,9 @@ export class LoanSignupComponent implements OnInit {
 
     ngOnInit(): void {
         this.loan = {};
+        this.user = {};
+
+        this.loadUserInfo();
 
         //get choice from querystring
         this.route.queryParams.subscribe(params => {
@@ -62,6 +69,16 @@ export class LoanSignupComponent implements OnInit {
             this.loans = [];
             this.loadAllLoans();
         });
+
+        //auto format phone number
+        this.signupForm.valueChanges.subscribe(val => {
+            if (typeof val.phone === 'string') {
+                const maskedVal = this.phonePipe.transform(val.phone, 'US');
+                if (val.phone !== maskedVal) {
+                    this.signupForm.patchValue({ phone: maskedVal });
+                }
+            }
+        });
     }
 
     loadAllLoans() {
@@ -69,6 +86,36 @@ export class LoanSignupComponent implements OnInit {
             this.loans = res;
             this.loan = this.loans[this.loanTypeId];
             this.signupForm.patchValue({ loanType: this.loan.loanName });
+
+            this.setTermOptions();
+        });
+    }
+
+    //set choices for term length, in months
+    setTermOptions() {
+        let increment = (this.loan.loanName == "Payday Loan" ? 1 : 12);
+        let size = (this.loan.termMax - this.loan.termMin) / increment + 1;
+
+        this.options = new Array(size + 1);
+        this.options[0] = { value: '', text: 'Choose...' };
+
+        for (let i = 1; i < this.options.length; i++) {
+            let x = (i - 1) * increment + this.loan.termMin;
+            this.options[i] = { value: x, text: x };
+        }
+
+    }
+
+    //autofill form with user info
+    loadUserInfo() {
+        this.httpService.getAll(`${environment.USERS_URL}` + '/1').subscribe((res: any) => {
+            this.user = res
+            this.signupForm.patchValue({ firstName: this.user.firstName });
+            this.signupForm.patchValue({ lastName: this.user.lastName });
+
+            this.user.phone = this.phonePipe.transform(this.user.phone, 'US');
+            this.signupForm.patchValue({ phone: this.user.phone });
+            this.signupForm.patchValue({ email: this.user.email });
         });
     }
 
@@ -76,16 +123,14 @@ export class LoanSignupComponent implements OnInit {
     calculate(fields: any) {
         try {
             let p = fields.principal;  //loan amount
-            let t = fields.term;  //years
+            let t = fields.term;  //months
 
             //scale interest rate based on term length
-            if(t <= 30)
-                this.interestRate = this.loan.lowerRange + (this.loan.upperRange - this.loan.lowerRange) * (1 - t / 30);
-            else
-                this.interestRate = this.loan.lowerRange
+            let scale = (t - this.loan.termMin) / (this.loan.termMax - this.loan.termMin)
+            this.interestRate = this.loan.lowerRange + (this.loan.upperRange - this.loan.lowerRange) * (1 - scale);
 
             let r = this.interestRate;  //monthly rate
-            let e = Math.pow(1 + r, t * 12);
+            let e = Math.pow(1 + r, t);
 
             this.result = p * r * e / (e - 1);  //monthly payment
             this.calcError = false;

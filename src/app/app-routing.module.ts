@@ -15,6 +15,7 @@ import { CardSignupComponent } from './cardsignup/cardsignup.component';
 import { CardApprovedComponent } from './cardapproved/cardapproved.component';
 import { LoanSignupComponent } from './loansignup/loansignup.component';
 import { LoanApprovedComponent } from './loanapproved/loanapproved.component';
+import { LoanStatusComponent } from './loan-status/loan-status.component';
 
 const routes: Routes = [
     {
@@ -77,6 +78,11 @@ const routes: Routes = [
             {
                 path: 'loans/signup',
                 component: LoanSignupComponent,
+                canActivate: [AuthGuardService]
+            },
+            {
+                path: 'loans/status',
+                component: LoanStatusComponent,
                 canActivate: [AuthGuardService]
             },
             {

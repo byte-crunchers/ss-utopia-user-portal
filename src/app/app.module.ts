@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YesNoPipe } from './shared/custom/usort.pipe';
 import { HighlightDirective } from './shared/custom/highlight.directive';
 import { AprPipe } from './shared/custom/apr.pipe';
+import { PhonePipe } from './shared/custom/phone.pipe';
 import { LoanTableComponent } from './loantable/loantable.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -28,6 +29,8 @@ import { CardSignupComponent } from './cardsignup/cardsignup.component';
 import { CardApprovedComponent } from './cardapproved/cardapproved.component';
 import { LoanSignupComponent } from './loansignup/loansignup.component';
 import { LoanApprovedComponent } from './loanapproved/loanapproved.component';
+import { LoanStatusComponent } from './loan-status/loan-status.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
     declarations: [
@@ -50,7 +53,8 @@ import { LoanApprovedComponent } from './loanapproved/loanapproved.component';
         CardSignupComponent,
         CardApprovedComponent,
         LoanSignupComponent,
-        LoanApprovedComponent
+        LoanApprovedComponent,
+        LoanStatusComponent
     ],
     imports: [
         BrowserModule,
@@ -60,12 +64,14 @@ import { LoanApprovedComponent } from './loanapproved/loanapproved.component';
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MatProgressSpinnerModule,
+        MatExpansionModule,
         NgbModule
     ],
     providers: [
         HttpService,
         { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-        JwtHelperService
+        JwtHelperService,
+        PhonePipe,
     ],
     bootstrap: [AppComponent]
 })

@@ -53,8 +53,10 @@ export class LoansComponent implements OnInit {
         this.modalInfo = [];
         this.modalInfo[0] = this.loans[i].upperRange;
         this.modalInfo[1] = this.loans[i].lowerRange;
-        this.modalInfo[2] = this.loans[i].lateFee;
-        this.modalInfo[3] = this.loans[i].secured;
+        this.modalInfo[2] = this.loans[i].termMax;
+        this.modalInfo[3] = this.loans[i].termMin;
+        this.modalInfo[4] = this.loans[i].lateFee;
+        this.modalInfo[5] = this.loans[i].secured;
 
         this.modalRef = this.modalService.open(content);
         this.modalRef.result.then(
