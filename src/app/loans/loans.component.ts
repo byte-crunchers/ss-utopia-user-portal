@@ -18,7 +18,7 @@ export class LoansComponent implements OnInit {
     modalHeader = "";
     modalImage = "";
     modalInfo: any;
-    images = ["mortgage.jpg", "auto_loan.jpg", "student_loan.png", "personal_loan.jpg", "payday_loan.jpg"];
+    images = ["mortgage.jpg", "auto_loan.jpg", "student_loan.jpg", "personal_loan.jpg", "payday_loan.jpg"];
     index = [0, 1, 2, 3, 4];  //display order
 
     //modal variables
@@ -27,18 +27,23 @@ export class LoansComponent implements OnInit {
     closeResult: any;
 
     ngOnInit(): void {
-        this.loans = [];
-        this.loans[0] = {};
-        this.loans[1] = {};
-        this.loans[2] = {};
-        this.loans[3] = {};
-        this.loans[4] = {};
+        //init blank values
+        this.loans = new Array(this.index.length);
+        for(let i=0; i<this.images.length; i++)
+            this.loans[i] = {};
+
         this.loadAllLoans();
     }
 
     loadAllLoans() {
         this.httpService.getAll(`${environment.LOAN_TYPES_URL}`).subscribe((res) => {
             this.loans = res;
+
+            //parse image filename from loanType name
+            this.images = new Array(this.loans.length);
+            for(let i=0; i<this.loans.length; i++){
+                this.images[i] = this.loans[i].loanName.toLowerCase().replace(" ", "_") + ".jpg";
+            }
         });
     }
 

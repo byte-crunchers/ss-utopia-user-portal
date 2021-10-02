@@ -23,8 +23,8 @@
                             <img src="assets/{{images[i]}}" alt="image">
 
                             <div class="card-body">
-                                <h4>{{loans[i].loanName}}</h4>
-                                <p class="card-text">APR Range: {{loans[i].lowerRange | apr | percent:'1.0-2'}} -
+                                <h4>{{loans[i].loanName}}&nbsp;</h4>
+                                <p class="card-text">APR: {{loans[i].lowerRange | apr | percent:'1.0-2'}} -
                                     {{loans[i].upperRange | apr | percent:'1.0-2'}}
                                     <br>Term: {{loans[i].termMin}} - {{loans[i].termMax}} months
                                     <br>Secured: {{loans[i].secured | yesNo}}

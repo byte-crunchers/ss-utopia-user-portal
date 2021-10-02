@@ -6,6 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PhonePipe } from '../shared/custom/phone.pipe';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
     selector: 'app-loansignup',
@@ -15,6 +16,7 @@ import { PhonePipe } from '../shared/custom/phone.pipe';
 export class LoanSignupComponent implements OnInit {
 
     constructor(
+        public authService: AuthService,
         private httpService: HttpService,
         private route: ActivatedRoute,
         private fb: FormBuilder,
@@ -24,7 +26,7 @@ export class LoanSignupComponent implements OnInit {
 
     user: any;  //user info
     loans: any;
-    images = ["mortgage.jpg", "auto_loan.jpg", "student_loan.png", "personal_loan.jpg", "payday_loan.jpg"];
+    loanImage = "blank.jpg";
     loanTypeId = 0;
     loan: any;  //currently selected loan
     interestRate = 0;  //calculated monthly interest rate
@@ -87,6 +89,7 @@ export class LoanSignupComponent implements OnInit {
             this.loan = this.loans[this.loanTypeId];
             this.signupForm.patchValue({ loanType: this.loan.loanName });
 
+            this.loanImage = this.loan.loanName.toLowerCase().replace(" ", "_") + ".jpg";
             this.setTermOptions();
         });
     }
@@ -103,12 +106,11 @@ export class LoanSignupComponent implements OnInit {
             let x = (i - 1) * increment + this.loan.termMin;
             this.options[i] = { value: x, text: x };
         }
-
     }
 
     //autofill form with user info
     loadUserInfo() {
-        this.httpService.getAll(`${environment.USERS_URL}` + '/1').subscribe((res: any) => {
+        this.httpService.getAll(`${environment.USERS_URL}` + '/' + this.authService.userId).subscribe((res: any) => {
             this.user = res
             this.signupForm.patchValue({ firstName: this.user.firstName });
             this.signupForm.patchValue({ lastName: this.user.lastName });

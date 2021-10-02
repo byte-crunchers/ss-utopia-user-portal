@@ -84,30 +84,59 @@
 
         <div class="modal-content">
 
-            <div class="modal-header">
-                <img class="w-100 shadow-sm" src="/assets/blank.jpg">
+            <form [formGroup]="paymentForm" class="needs-validation">
 
-            </div>
-            <div class="modal-body">
-                <h4 class="modal-title">{{modalHeader}}</h4><br>
+                <div class="modal-header">
+                    <img class="w-50 shadow-sm mx-auto" src="/assets/{{modalImage}}">
 
-                <p>
-                    Balance: ${{modalInfo[0] | number:'1.2-2'}}<br>
-                    Payment Due: ${{modalInfo[1] | number:'1.2-2'}}<br>
-                    Due Date: {{modalInfo[2]}}
-                </p>
+                </div>
+                <div class="modal-body">
+                    <h4 class="modal-title">{{modalHeader}}</h4><br>
 
-                <!-- <p>Payment Amount:</p> -->
+                    <p>
+                        Balance: ${{modalInfo[0] | number:'1.2-2'}}<br>
+                        Payment Due: ${{modalInfo[1] | number:'1.2-2'}}<br>
+                        Due Date: {{modalInfo[2]}}
+                    </p>
 
+                    <div class="w-50">
+                        <label for="account" class="form-label">Pay from account</label>
+                        <select class="form-select" id="account" formControlName="account">
+                            <option *ngFor="let option of options" [value]="option.value">
+                                {{option.text}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="w-50">
+                        <div *ngIf="showError('account')" class="invalid-feedback float-end">
+                            Valid account is required.
+                        </div>
+                    </div>
+                    <br>
+                    <div class="w-50">
+                        <label for="amount" class="form-label">Payment amount</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input type="text" class="form-control" id="amount" formControlName="amount">
+                        </div>
+                    </div>
+                    <div class="w-50">
+                        <div *ngIf="showError('amount')" class="invalid-feedback float-end">
+                            Valid amount is required.
+                        </div>
+                    </div>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                    (click)="closeModal()">Submit</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                    (click)="closeModal()">Cancel</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="closeModal()">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="closeModal()">Cancel</button>
 
-            </div>
+                </div>
+
+            </form>
+
         </div>
     </div>
 

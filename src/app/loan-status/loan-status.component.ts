@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'src/app/shared/services/http.service';
 import { environment } from 'src/environments/environment';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { LoanApprovedComponent } from '../loanapproved/loanapproved.component';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { FormBuilder } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-loan-status',
@@ -12,8 +14,10 @@ import { LoanApprovedComponent } from '../loanapproved/loanapproved.component';
 export class LoanStatusComponent implements OnInit {
 
     constructor(
+        public authService: AuthService,
         private httpService: HttpService,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private fb: FormBuilder,
     ) { }
 
     loans: any;
@@ -25,14 +29,43 @@ export class LoanStatusComponent implements OnInit {
     errMsg: any;
     closeResult: any;
     modalHeader = "";
+    modalImage = "";
     modalInfo: any;
+    options: any  //payment account choices
+
+    //define form field validators
+    paymentForm = this.fb.group({
+        account: ['', Validators.required],
+        amount: ['', [Validators.required, Validators.pattern(/^[\d\.]+$/)]],
+    });
+
+    //display error message if the field has been touched & fails validator checks
+    showError(field: string): boolean {
+        let x = this.paymentForm.get(field);
+        if (x && x.invalid && (x.dirty || x.touched))
+            return true;
+        return false;
+    }
 
     ngOnInit(): void {
         this.loadAllLoans();
+        this.setAccountOptions();
     }
 
+    //set choices for payment account
+    setAccountOptions() {
+        let size = 3;
+        this.options = new Array(size + 1);
+        this.options[0] = { value: '', text: 'Choose...' };
+
+        for (let i = 1; i < this.options.length; i++) {
+            this.options[i] = { value: i, text: "placeholder" };
+        }
+    }
+
+    //get loans by user ID
     loadAllLoans() {
-        this.httpService.getAll(`${environment.LOANS_URL}` + '/user/1').subscribe((res) => {
+        this.httpService.getAll(`${environment.LOANS_URL}` + '/myloans/' + this.authService.userId).subscribe((res) => {
             this.loans = res;
             this.totalLoans = this.loans.length;
             this.setStatuses();
@@ -76,6 +109,7 @@ export class LoanStatusComponent implements OnInit {
 
     openModal(content: any, i: any) {
         this.modalHeader = this.loans[i].loanType;
+        this.modalImage = this.loans[i].loanType.toLowerCase().replace(" ", "_") + ".jpg";
 
         this.modalInfo = [];
         this.modalInfo[0] = this.loans[i].balance;

@@ -11,8 +11,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthService {
 
-    name = "";  // user profile name, printed in website header
     loginUrl = `${environment.AUTH_URL}`;
+    name = "";  // user profile name, printed in website header
+    userId = 1;  //test user
 
     constructor(
         private http: HttpClient,
