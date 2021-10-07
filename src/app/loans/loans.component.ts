@@ -38,12 +38,6 @@ export class LoansComponent implements OnInit {
     loadAllLoans() {
         this.httpService.getAll(`${environment.LOAN_TYPES_URL}`).subscribe((res) => {
             this.loans = res;
-
-            //parse image filename from loanType name
-            this.images = new Array(this.loans.length);
-            for(let i=0; i<this.loans.length; i++){
-                this.images[i] = this.loans[i].loanName.toLowerCase().replace(" ", "_") + ".jpg";
-            }
         });
     }
 

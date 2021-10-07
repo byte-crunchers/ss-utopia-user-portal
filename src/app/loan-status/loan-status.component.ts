@@ -78,11 +78,11 @@ export class LoanStatusComponent implements OnInit {
             this.loans[i].index = i;
             
             //set status text & icon
-            if (!this.loans[i].isApproved){
+            if (!this.loans[i].approved){
                 this.loans[i].statusTxt = "Awaiting approval";
                 this.loans[i].icon = -1;
             }
-            else if (!this.loans[i].isConfirmed){
+            else if (!this.loans[i].confirmed){
                 this.loans[i].statusTxt = "Awaiting confirmation";
                 this.loans[i].icon = -1;
             }

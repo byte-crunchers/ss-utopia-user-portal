@@ -19,8 +19,8 @@ export class CardsComponent implements OnInit {
     modalHeader = "";
     modalImage = "";
     modalInfo: any;
-    images = ["red_card.png", "orange_card.png", "plat_card.png", "blue_card.png", "white_card.png"];
-    index = [1, 2, 3, 0, 4];  //display order
+    images = ["basic_credit.png", "platinum_credit.png", "plus_credit.png", "foodies_credit.png", "utopia_debit.png"];
+    index = [0, 1, 2, 3, 4];  //display order
 
     //modal variables
     modalRef!: NgbModalRef;
@@ -28,12 +28,11 @@ export class CardsComponent implements OnInit {
     closeResult: any;
 
     ngOnInit(): void {
-        this.cards = [];
-        this.cards[0] = {};
-        this.cards[1] = {};
-        this.cards[2] = {};
-        this.cards[3] = {};
-        this.cards[4] = {};
+        //init blank values
+        this.cards = new Array(this.index.length);
+        for(let i=0; i<this.images.length; i++)
+            this.cards[i] = {};
+
         this.loadAllCards();
     }
 
@@ -48,15 +47,14 @@ export class CardsComponent implements OnInit {
     }
 
     openModal(content: any, i: any) {
-        this.modalHeader = this.cards[i].cardName;
+        this.modalHeader = this.cards[i].id;
         this.modalImage = this.images[i];
 
         this.modalInfo = [];
-        this.modalInfo[0] = this.cards[i].annualFee;
-        this.modalInfo[1] = this.cards[i].apr;
-        this.modalInfo[2] = this.cards[i].cashBack;
-        this.modalInfo[3] = this.cards[i].foodiesPointsPercentages;
-        this.modalInfo[4] = this.cards[i].lateFee;
+        this.modalInfo[0] = this.cards[i].annual_fee;
+        this.modalInfo[1] = this.cards[i].cashBack;
+        this.modalInfo[2] = this.cards[i].foodie_pts;
+        this.modalInfo[3] = this.cards[i].late_fee;
 
         this.modalRef = this.modalService.open(content);
         this.modalRef.result.then(

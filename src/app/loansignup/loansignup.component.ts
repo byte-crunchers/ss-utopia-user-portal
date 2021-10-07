@@ -37,6 +37,7 @@ export class LoanSignupComponent implements OnInit {
 
     //define form field validators
     signupForm = this.fb.group({
+        userId: [''],  //hidden field
         loanType: [''],  //hidden field
         monthlyPayment: ['', Validators.required],  //calculated field
         interestRate: ['', Validators.required],  //calculated field
@@ -110,10 +111,11 @@ export class LoanSignupComponent implements OnInit {
 
     //autofill form with user info
     loadUserInfo() {
-        this.httpService.getAll(`${environment.USERS_URL}` + '/' + this.authService.userId).subscribe((res: any) => {
-            this.user = res
-            this.signupForm.patchValue({ firstName: this.user.firstName });
-            this.signupForm.patchValue({ lastName: this.user.lastName });
+        this.httpService.getAll(`${environment.USERS_URL}` + '/' + this.authService.name).subscribe((res: any) => {
+            this.user = res[0];
+            this.signupForm.patchValue({ userId: this.authService.userId });
+            this.signupForm.patchValue({ firstName: this.user.first_name });
+            this.signupForm.patchValue({ lastName: this.user.last_name });
 
             this.user.phone = this.phonePipe.transform(this.user.phone, 'US');
             this.signupForm.patchValue({ phone: this.user.phone });

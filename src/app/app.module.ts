@@ -31,6 +31,8 @@ import { LoanSignupComponent } from './loansignup/loansignup.component';
 import { LoanApprovedComponent } from './loanapproved/loanapproved.component';
 import { LoanStatusComponent } from './loan-status/loan-status.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { CardStatusComponent } from './card-status/card-status.component';
+import { Last4Pipe } from './shared/custom/last4.pipe';
 
 @NgModule({
     declarations: [
@@ -54,7 +56,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
         CardApprovedComponent,
         LoanSignupComponent,
         LoanApprovedComponent,
-        LoanStatusComponent
+        LoanStatusComponent,
+        CardStatusComponent,
+        Last4Pipe
     ],
     imports: [
         BrowserModule,
