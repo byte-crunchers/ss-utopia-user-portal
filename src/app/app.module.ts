@@ -33,6 +33,9 @@ import { LoanStatusComponent } from './loan-status/loan-status.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CardStatusComponent } from './card-status/card-status.component';
 import { Last4Pipe } from './shared/custom/last4.pipe';
+import { DecimalPipe } from '@angular/common';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -58,7 +61,8 @@ import { Last4Pipe } from './shared/custom/last4.pipe';
         LoanApprovedComponent,
         LoanStatusComponent,
         CardStatusComponent,
-        Last4Pipe
+        Last4Pipe,
+        PaymentSuccessComponent
     ],
     imports: [
         BrowserModule,
@@ -76,6 +80,8 @@ import { Last4Pipe } from './shared/custom/last4.pipe';
         { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
         JwtHelperService,
         PhonePipe,
+        DecimalPipe,
+        DatePipe
     ],
     bootstrap: [AppComponent]
 })

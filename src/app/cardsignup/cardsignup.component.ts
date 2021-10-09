@@ -92,7 +92,7 @@ export class CardSignupComponent implements OnInit {
 
     //autofill form with user info
     loadUserInfo() {
-        this.httpService.getAll(`${environment.USERS_URL}` + '/' + this.authService.name).subscribe((res: any) => {
+        this.httpService.getAll(`${environment.ACCOUNTS_URL}` + '/userinfo/' + this.authService.name).subscribe((res: any) => {
             this.user = res[0];
             this.signupForm.patchValue({ userId: this.authService.userId });
             this.signupForm.patchValue({ firstName: this.user.first_name });

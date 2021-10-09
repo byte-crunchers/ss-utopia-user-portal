@@ -50,10 +50,6 @@ export class CardStatusComponent implements OnInit {
                 this.cards[i].statusTxt = "Deactivated";
                 this.cards[i].icon = -2;
             }
-            else if (this.cards[i].balance == 0){
-                this.cards[i].statusTxt = "Paid in full";
-                this.cards[i].icon = 0;
-            }
             else{
                 this.cards[i].statusTxt = "Active";
 
@@ -65,6 +61,11 @@ export class CardStatusComponent implements OnInit {
             
         }
 
+    }
+
+    //enable pay button only when status is active
+    enablePay(i: any): boolean {
+        return this.cards[i].statusTxt == "Active";
     }
 
 }

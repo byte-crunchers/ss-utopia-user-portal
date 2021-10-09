@@ -73,8 +73,10 @@
                             <p>APR: {{card.debtInterest | apr | percent:'1.0-2'}}</p>
                             <p>Credit Limit: ${{card.creditLimit | number:'1.2-2'}}</p>
                             <p>Payment Due: ${{card.paymentDue | number:'1.2-2'}}</p>
-                            <p>Due Date: {{card.dueDate}}</p>
-                            <button class="float-end btn btn-primary btn-sm">Pay Card</button>
+                            <p>Due Date: {{card.dueDate | date: 'yyyy-MM-dd'}}</p>
+
+                            <button class="float-end btn btn-primary btn-sm"
+                                [disabled]="!this.enablePay(card.index)">Pay Card</button>
                         </div>
                         <ng-template #elseBlock>
                             <p>Checking balance: ${{card.balance | number:'1.2-2'}}</p>
