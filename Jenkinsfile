@@ -31,7 +31,7 @@ pipeline {
         stage(" SonarQube analysis") {
             steps {
               withSonarQubeEnv('SonarQube') {
-                sh 'npm install' 
+                sh ' npm install --legacy-peer-deps' 
                 sh 'npm install sonarqube-scanner --save-dev'
                 sh 'npm run sonar'
               }

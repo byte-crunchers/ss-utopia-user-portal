@@ -46,7 +46,7 @@ import { LoanApprovedComponent } from './loanapproved/loanapproved.component';
         LoanTableComponent,
         LoginComponent,
         RegisterComponent,
-        AccountsComponent
+        AccountsComponent,
         CardSignupComponent,
         CardApprovedComponent,
         LoanSignupComponent,
