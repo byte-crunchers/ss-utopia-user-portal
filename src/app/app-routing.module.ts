@@ -15,6 +15,8 @@ import { CardSignupComponent } from './cardsignup/cardsignup.component';
 import { CardApprovedComponent } from './cardapproved/cardapproved.component';
 import { LoanSignupComponent } from './loansignup/loansignup.component';
 import { LoanApprovedComponent } from './loanapproved/loanapproved.component';
+import { ProfileComponent } from './profile/profile.component';
+import { PasswordrecoveryComponent } from './passwordrecovery/passwordrecovery.component';
 
 const routes: Routes = [
     {
@@ -88,6 +90,15 @@ const routes: Routes = [
                 path: 'investing',
                 component: StocksComponent,
                 canActivate: [AuthGuardService]
+            },
+            {
+                path: 'profile',
+                component: ProfileComponent,
+                canActivate: [AuthGuardService]
+            },
+            {
+                path: 'passwordrecovery',
+                component: PasswordrecoveryComponent
             },
             {  //redirect invalid urls to home page
                 path: '**',

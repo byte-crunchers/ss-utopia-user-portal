@@ -28,6 +28,8 @@ import { CardSignupComponent } from './cardsignup/cardsignup.component';
 import { CardApprovedComponent } from './cardapproved/cardapproved.component';
 import { LoanSignupComponent } from './loansignup/loansignup.component';
 import { LoanApprovedComponent } from './loanapproved/loanapproved.component';
+import { ProfileComponent } from './profile/profile.component';
+import { PasswordrecoveryComponent } from './passwordrecovery/passwordrecovery.component';
 
 @NgModule({
     declarations: [
@@ -46,11 +48,13 @@ import { LoanApprovedComponent } from './loanapproved/loanapproved.component';
         LoanTableComponent,
         LoginComponent,
         RegisterComponent,
-        AccountsComponent
+        AccountsComponent,
         CardSignupComponent,
         CardApprovedComponent,
         LoanSignupComponent,
-        LoanApprovedComponent
+        LoanApprovedComponent,
+        ProfileComponent,
+        PasswordrecoveryComponent
     ],
     imports: [
         BrowserModule,
