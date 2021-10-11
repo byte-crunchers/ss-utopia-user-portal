@@ -5,7 +5,6 @@ pipeline {
     {
       buildDiscarder(logRotator(numToKeepStr: '3'))
     }
-    agent any
 
     environment {
       AWS_DEFAULT_REGION="us-east-1" 
@@ -18,7 +17,7 @@ pipeline {
       
       stage('checkout') {
         steps {
-          git branch: 'feature_kubernetes', credentialsId: 'git_login', url: 'https://github.com/byte-crunchers/ss-utopia-account.git'
+          git branch: 'feature_kubernetes', credentialsId: 'git_login', url: 'https://github.com/byte-crunchers/ss-utopia-user-portal.git'
         }
       }
       stage('get_commit_msg') {
