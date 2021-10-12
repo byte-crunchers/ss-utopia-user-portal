@@ -36,6 +36,9 @@ import { Last4Pipe } from './shared/custom/last4.pipe';
 import { DecimalPipe } from '@angular/common';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { DatePipe } from '@angular/common';
+import { ProfileComponent } from './profile/profile.component';
+import { PasswordrecoveryComponent } from './passwordrecovery/passwordrecovery.component';
+
 
 @NgModule({
     declarations: [
@@ -62,7 +65,9 @@ import { DatePipe } from '@angular/common';
         LoanStatusComponent,
         CardStatusComponent,
         Last4Pipe,
-        PaymentSuccessComponent
+        PaymentSuccessComponent,
+        ProfileComponent,
+        PasswordrecoveryComponent
     ],
     imports: [
         BrowserModule,
