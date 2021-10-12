@@ -158,6 +158,14 @@ export class LoanSignupComponent implements OnInit {
 
     //submit button
     submit(fields: any) {
+
+        //income filter
+        if(fields.income < 30000)
+        {
+            alert("Your income is too low to qualify for a loan.")
+            return;
+        }
+
         console.log('Submitting loan signup form...');
         this.showSpinner = true;
 

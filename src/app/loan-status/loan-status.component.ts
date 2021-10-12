@@ -39,6 +39,7 @@ export class LoanStatusComponent implements OnInit {
     showSpinner = false;
     options: any  //payment account choices
     selectedBalance: any;
+    minPayment = 25;
 
     //define form field validators
     paymentForm = this.fb.group({
@@ -168,6 +169,14 @@ export class LoanStatusComponent implements OnInit {
 
     //submit button
     submit(fields: any) {
+
+        //check minimum payment amount
+        if(fields.amount < this.minPayment)
+        {
+            alert('Amount must be at least the minimum payment.');
+            return;
+        }
+
         console.log('Submitting loan payment...');
         this.showSpinner = true;
 
