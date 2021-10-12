@@ -9,11 +9,16 @@
                     <button class="navbar-toggler" ngbDropdownToggle>
                         <span class="navbar-toggler-icon"></span>
                     </button>
+
+                    <!-- site navigation menu -->
                     <div ngbDropdownMenu class="bg-light">
                         <button ngbDropdownItem routerLink="/">Home</button>
+                        <hr class="dropdown-divider">
                         <button ngbDropdownItem routerLink="/cards">Credit & Debit Cards</button>
                         <button ngbDropdownItem routerLink="/loans">Loans</button>
                         <button ngbDropdownItem routerLink="/investing">Investing</button>
+                        <button ngbDropdownItem routerLink="/accounts">Accounts</button>
+                        <button ngbDropdownItem routerLink="/">Branches</button>
                     </div>
                 </div>
 
@@ -37,8 +42,13 @@
                     </svg>
                     <span class="text-light">&nbsp;{{this.authService.name}}</span>
                 </button>
+
+                <!-- profile menu -->
                 <div ngbDropdownMenu class="bg-light">
                     <button ngbDropdownItem routerLink="/profile">Profile</button>
+                    <hr class="dropdown-divider">
+                    <button ngbDropdownItem routerLink="/cards/status">My Cards</button>
+                    <button ngbDropdownItem routerLink="/loans/status">My Loans</button>
                     <hr class="dropdown-divider">
                     <button ngbDropdownItem (click)="logout()">Log Out</button>
                 </div>

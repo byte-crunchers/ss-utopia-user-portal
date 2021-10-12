@@ -16,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YesNoPipe } from './shared/custom/usort.pipe';
 import { HighlightDirective } from './shared/custom/highlight.directive';
 import { AprPipe } from './shared/custom/apr.pipe';
+import { PhonePipe } from './shared/custom/phone.pipe';
 import { LoanTableComponent } from './loantable/loantable.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -28,8 +29,16 @@ import { CardSignupComponent } from './cardsignup/cardsignup.component';
 import { CardApprovedComponent } from './cardapproved/cardapproved.component';
 import { LoanSignupComponent } from './loansignup/loansignup.component';
 import { LoanApprovedComponent } from './loanapproved/loanapproved.component';
+import { LoanStatusComponent } from './loan-status/loan-status.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { CardStatusComponent } from './card-status/card-status.component';
+import { Last4Pipe } from './shared/custom/last4.pipe';
+import { DecimalPipe } from '@angular/common';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
+import { DatePipe } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
 import { PasswordrecoveryComponent } from './passwordrecovery/passwordrecovery.component';
+
 
 @NgModule({
     declarations: [
@@ -53,6 +62,10 @@ import { PasswordrecoveryComponent } from './passwordrecovery/passwordrecovery.c
         CardApprovedComponent,
         LoanSignupComponent,
         LoanApprovedComponent,
+        LoanStatusComponent,
+        CardStatusComponent,
+        Last4Pipe,
+        PaymentSuccessComponent,
         ProfileComponent,
         PasswordrecoveryComponent
     ],
@@ -64,12 +77,16 @@ import { PasswordrecoveryComponent } from './passwordrecovery/passwordrecovery.c
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MatProgressSpinnerModule,
+        MatExpansionModule,
         NgbModule
     ],
     providers: [
         HttpService,
         { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-        JwtHelperService
+        JwtHelperService,
+        PhonePipe,
+        DecimalPipe,
+        DatePipe
     ],
     bootstrap: [AppComponent]
 })

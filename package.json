@@ -23,6 +23,7 @@
     "@auth0/angular-jwt": "^5.0.2",
     "@ng-bootstrap/ng-bootstrap": "^4.0.0",
     "bootstrap": "^5.1.0",
+    "libphonenumber-js": "^1.9.34",
     "moment": "^2.29.1",
     "ngx-bootstrap": "^7.0.0",
     "rxjs": "~6.6.0",

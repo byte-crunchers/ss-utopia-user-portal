@@ -23,13 +23,15 @@
                             <img src="assets/{{images[i]}}" alt="image">
 
                             <div class="card-body">
-                                <h4>{{cards[i].cardName}}</h4>
-                                <p class="card-text">Annual Fee: ${{cards[i].annualFee}} <br>APR: {{cards[i].apr |
-                                    percent:'1.0-5'}} <br>
-                                    <span *ngIf="i == 4; else elseBlock">Foodies Points:
-                                        {{cards[4].foodiesPointsPercentages | percent:'1.0-5'}}</span>
-                                    <ng-template #elseBlock>Cash Back: {{cards[i].cashBack | percent:'1.0-5'}}
-                                    </ng-template>
+                                <h4>{{cards[i].id}}&nbsp;</h4>
+                                <p class="card-text">
+                                    <span *ngIf="i == 3; else elseBlock">
+                                        Foodie Points: {{cards[i].foodie_pts | percent:'1.0-5'}}</span>
+                                    <ng-template #elseBlock>
+                                        Cash Back: {{cards[i].cashBack | percent:'1.0-5'}}
+                                    </ng-template><br>
+                                    Annual Fee: ${{cards[i].annual_fee}} <br>
+                                    Late Fee: ${{cards[i].late_fee}}
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
@@ -65,9 +67,9 @@
             <div class="modal-body">
                 <h4 class="modal-title">{{modalHeader}}</h4><br>
 
-                <p>Annual Fee: ${{modalInfo[0]}} <br>APR: {{modalInfo[1] | percent:'1.0-5'}} <br>Cash Back:
-                    {{modalInfo[2] | percent:'1.0-5'}} <br>
-                    Foodies Points: {{modalInfo[3] | percent:'1.0-5'}} <br>Late Fee: ${{modalInfo[4]}} </p>
+                <p>Annual Fee: ${{modalInfo[0]}} <br>Cash Back:
+                    {{modalInfo[1] | percent:'1.0-5'}} <br>
+                    Foodies Points: {{modalInfo[2] | percent:'1.0-5'}} <br>Late Fee: ${{modalInfo[3]}} </p>
 
             </div>
             <div class="modal-footer">

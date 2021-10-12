@@ -23,10 +23,10 @@
                             <img src="assets/{{images[i]}}" alt="image">
 
                             <div class="card-body">
-                                <h4>{{loans[i].loanName}}</h4>
-                                <p class="card-text">APR Range: {{loans[i].lowerRange | apr | percent:'1.0-2'}} -
+                                <h4>{{loans[i].loanName}}&nbsp;</h4>
+                                <p class="card-text">APR: {{loans[i].lowerRange | apr | percent:'1.0-2'}} -
                                     {{loans[i].upperRange | apr | percent:'1.0-2'}}
-                                    <br>Late Fee: ${{loans[i].lateFee}}
+                                    <br>Term: {{loans[i].termMin}} - {{loans[i].termMax}} months
                                     <br>Secured: {{loans[i].secured | yesNo}}
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
@@ -65,8 +65,10 @@
                 <p>
                     Maximum APR: {{modalInfo[0] | apr | percent:'1.0-2'}}
                     <br>Minimum APR: {{modalInfo[1] | apr | percent:'1.0-2'}}
-                    <br>Late Fee: ${{modalInfo[2]}}
-                    <br>Secured: {{modalInfo[3] | yesNo}}
+                    <br>Maximum Term: {{modalInfo[2]}} months
+                    <br>Minimum Term: {{modalInfo[3]}} months
+                    <br>Late Fee: ${{modalInfo[4]}}
+                    <br>Secured: {{modalInfo[5] | yesNo}}
                 </p>
 
             </div>

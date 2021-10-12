@@ -18,7 +18,7 @@ export class LoansComponent implements OnInit {
     modalHeader = "";
     modalImage = "";
     modalInfo: any;
-    images = ["mortgage.jpg", "auto_loan.jpg", "student_loan.png", "personal_loan.jpg", "payday_loan.jpg"];
+    images = ["mortgage.jpg", "auto_loan.jpg", "student_loan.jpg", "personal_loan.jpg", "payday_loan.jpg"];
     index = [0, 1, 2, 3, 4];  //display order
 
     //modal variables
@@ -27,17 +27,16 @@ export class LoansComponent implements OnInit {
     closeResult: any;
 
     ngOnInit(): void {
-        this.loans = [];
-        this.loans[0] = {};
-        this.loans[1] = {};
-        this.loans[2] = {};
-        this.loans[3] = {};
-        this.loans[4] = {};
+        //init blank values
+        this.loans = new Array(this.index.length);
+        for(let i=0; i<this.images.length; i++)
+            this.loans[i] = {};
+
         this.loadAllLoans();
     }
 
     loadAllLoans() {
-        this.httpService.getAll(`${environment.LOANS_URL}`).subscribe((res) => {
+        this.httpService.getAll(`${environment.LOAN_TYPES_URL}`).subscribe((res) => {
             this.loans = res;
         });
     }
@@ -53,8 +52,10 @@ export class LoansComponent implements OnInit {
         this.modalInfo = [];
         this.modalInfo[0] = this.loans[i].upperRange;
         this.modalInfo[1] = this.loans[i].lowerRange;
-        this.modalInfo[2] = this.loans[i].lateFee;
-        this.modalInfo[3] = this.loans[i].secured;
+        this.modalInfo[2] = this.loans[i].termMax;
+        this.modalInfo[3] = this.loans[i].termMin;
+        this.modalInfo[4] = this.loans[i].lateFee;
+        this.modalInfo[5] = this.loans[i].secured;
 
         this.modalRef = this.modalService.open(content);
         this.modalRef.result.then(

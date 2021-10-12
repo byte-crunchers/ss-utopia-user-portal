@@ -15,8 +15,12 @@ import { CardSignupComponent } from './cardsignup/cardsignup.component';
 import { CardApprovedComponent } from './cardapproved/cardapproved.component';
 import { LoanSignupComponent } from './loansignup/loansignup.component';
 import { LoanApprovedComponent } from './loanapproved/loanapproved.component';
+import { LoanStatusComponent } from './loan-status/loan-status.component';
+import { CardStatusComponent } from './card-status/card-status.component';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PasswordrecoveryComponent } from './passwordrecovery/passwordrecovery.component';
+
 
 const routes: Routes = [
     {
@@ -52,6 +56,11 @@ const routes: Routes = [
                 canActivate: [AuthGuardService]
             },
             {
+                path: 'cards/status',
+                component: CardStatusComponent,
+                canActivate: [AuthGuardService]
+            },
+            {
                 path: 'accounts',
                 component: AccountsComponent,
                 canActivate: [AuthGuardService]
@@ -82,8 +91,18 @@ const routes: Routes = [
                 canActivate: [AuthGuardService]
             },
             {
+                path: 'loans/status',
+                component: LoanStatusComponent,
+                canActivate: [AuthGuardService]
+            },
+            {
                 path: 'loans/approved',
                 component: LoanApprovedComponent,
+                canActivate: [AuthGuardService]
+            },
+            {
+                path: 'loans/paid',
+                component: PaymentSuccessComponent,
                 canActivate: [AuthGuardService]
             },
             {

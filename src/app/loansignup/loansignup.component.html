@@ -10,7 +10,7 @@
                     <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each
                         required form group has a validation state that can be triggered by attempting to submit the
                         form without completing it.</p>
-                    <img class="d-block mx-auto mb-4 shadow-sm" src="/assets/{{images[loanTypeId]}}">
+                    <img class="d-block mx-auto mb-4 shadow-sm" src="/assets/{{loanImage}}">
                     <h2>&nbsp;{{loan.loanName}}&nbsp;</h2>
                 </div>
 
@@ -36,9 +36,14 @@
                         <div class="col-sm-4">
                             <label for="term" class="form-label">Term</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="term" formControlName="term">
-                                <span class="input-group-text">years</span>
+                                <select class="form-select" id="term" formControlName="term">
+                                    <option *ngFor="let option of options" [value]="option.value">
+                                        {{option.text}}
+                                    </option>
+                                </select>
+                                <span class="input-group-text">months</span>
                             </div>
+                           
                             <div *ngIf="showError('term')" class="invalid-feedback">
                                 Valid term is required.
                             </div>

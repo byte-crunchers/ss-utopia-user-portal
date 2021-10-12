@@ -4,9 +4,18 @@
 
 export const environment = {
     production: false,
-    CARDS_URL: 'https://184.73.38.151:8443/api/v0.1/CardTypes',
-    LOANS_URL: 'https://184.73.38.151:8443/api/v0.1/LoanTypes',
-    AUTH_URL:  'https://184.73.38.151:8443/login'
+    AUTH_URL:       'https://184.73.38.151:8443/login',
+    ACCOUNTS_URL:   'https://184.73.38.151:8443/api/v0.1/accounts',
+    CARD_TYPES_URL: 'https://184.73.38.151:8443/api/v0.1/accountTypes',
+    CARDS_URL:      'https://184.73.38.151:8443/api/v0.1/cards',
+    LOAN_TYPES_URL: 'https://184.73.38.151:8443/api/v0.1/LoanTypes',
+    LOANS_URL:      'https://184.73.38.151:8443/loans',
+
+    // ACCOUNTS_URL:   'https://localhost:8443/api/v0.1/accounts',
+    // CARD_TYPES_URL: 'https://localhost:8443/api/v0.1/accountTypes',
+    // CARDS_URL:      'https://localhost:8443/api/v0.1/cards',
+    // LOAN_TYPES_URL: 'https://localhost:8444/api/v0.1/LoanTypes',
+    // LOANS_URL:      'https://localhost:8444/loans',
 };
 
 /*

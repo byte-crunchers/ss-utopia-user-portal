@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PhonePipe } from '../shared/custom/phone.pipe';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
     selector: 'app-cardsignup',
@@ -14,21 +16,25 @@ import { Router } from '@angular/router';
 export class CardSignupComponent implements OnInit {
 
     constructor(
+        public authService: AuthService,
         private httpService: HttpService,
         private route: ActivatedRoute,
         private fb: FormBuilder,
-        public router: Router
+        public router: Router,
+        private phonePipe: PhonePipe
     ) { }
 
+    user: any;  //user info
     cards: any;
-    images = ["red_card.png", "orange_card.png", "plat_card.png", "blue_card.png", "white_card.png"];
+    cardImage = "blank_card.png";
     cardTypeId = 0;
     card: any;  //currently selected card
     showSpinner = false;
 
     //define form field validators
     signupForm = this.fb.group({
-        cardType: [''],  //hidden field for POST
+        userId: [''],  //hidden field
+        cardType: [''],  //hidden field
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         address: ['', Validators.required],
@@ -50,6 +56,9 @@ export class CardSignupComponent implements OnInit {
 
     ngOnInit(): void {
         this.card = {};
+        this.user = {};
+
+        this.loadUserInfo();
 
         //get choice from querystring
         this.route.queryParams.subscribe(params => {
@@ -59,13 +68,44 @@ export class CardSignupComponent implements OnInit {
             this.cards = [];
             this.loadAllCards();
         });
+        
+        //auto format phone number
+        this.signupForm.valueChanges.subscribe(val => {
+            if (typeof val.phone === 'string') {
+                const maskedVal = this.phonePipe.transform(val.phone, 'US');
+                if (val.phone !== maskedVal) {
+                    this.signupForm.patchValue({ phone: maskedVal });
+                }
+            }
+        });
     }
 
     loadAllCards() {
-        this.httpService.getAll(`${environment.CARDS_URL}`).subscribe((res) => {
+        this.httpService.getAll(`${environment.CARD_TYPES_URL}`).subscribe((res) => {
             this.cards = res;
             this.card = this.cards[this.cardTypeId];
-            this.signupForm.patchValue({ cardType: this.card.cardName });
+            this.signupForm.patchValue({ cardType: this.card.id });
+
+            this.cardImage = this.card.id.toLowerCase().replace(" ", "_") + ".png";
+        });
+    }
+
+    //autofill form with user info
+    loadUserInfo() {
+        this.httpService.getAll(`${environment.ACCOUNTS_URL}` + '/userinfo/' + this.authService.name).subscribe((res: any) => {
+            this.user = res[0];
+            this.signupForm.patchValue({ userId: this.authService.userId });
+            this.signupForm.patchValue({ firstName: this.user.first_name });
+            this.signupForm.patchValue({ lastName: this.user.last_name });
+
+            this.user.phone = this.phonePipe.transform(this.user.phone, 'US');
+            this.signupForm.patchValue({ phone: this.user.phone });
+            this.signupForm.patchValue({ email: this.user.email });
+
+            this.signupForm.patchValue({ address: this.user.street_address });
+            this.signupForm.patchValue({ city: this.user.city });
+            this.signupForm.patchValue({ state: this.user.state });
+            this.signupForm.patchValue({ zip: this.user.zip });
         });
     }
 
@@ -74,7 +114,7 @@ export class CardSignupComponent implements OnInit {
         console.log('Submitting card signup form...');
         this.showSpinner = true;
 
-        this.httpService.postForm(`${environment.CARDS_URL}` + '/form', fields).subscribe(
+        this.httpService.postForm(`${environment.CARDS_URL}`, fields).subscribe(
             (response: any) => {
                 console.log("Form saved successfully!");
                 this.router.navigateByUrl('/cards/approved');
