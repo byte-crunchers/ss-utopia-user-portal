@@ -86,6 +86,7 @@ import { PasswordrecoveryComponent } from './passwordrecovery/passwordrecovery.c
         JwtHelperService,
         PhonePipe,
         DecimalPipe,
+        Last4Pipe,
         DatePipe
     ],
     bootstrap: [AppComponent]
