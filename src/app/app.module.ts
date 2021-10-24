@@ -30,6 +30,7 @@ import { LoanSignupComponent } from './loansignup/loansignup.component';
 import { LoanApprovedComponent } from './loanapproved/loanapproved.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PasswordrecoveryComponent } from './passwordrecovery/passwordrecovery.component';
+import { AccounttransactionComponent } from './accounttransaction/accounttransaction.component';
 
 @NgModule({
     declarations: [
@@ -54,7 +55,8 @@ import { PasswordrecoveryComponent } from './passwordrecovery/passwordrecovery.c
         LoanSignupComponent,
         LoanApprovedComponent,
         ProfileComponent,
-        PasswordrecoveryComponent
+        PasswordrecoveryComponent,
+        AccounttransactionComponent
     ],
     imports: [
         BrowserModule,
