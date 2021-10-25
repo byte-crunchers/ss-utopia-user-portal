@@ -11,12 +11,12 @@ export const environment = {
     // LOAN_TYPES_URL: 'https://184.73.38.151:8443/api/v0.1/LoanTypes',
     // LOANS_URL:      'https://184.73.38.151:8443/loans',
 
-    AUTH_URL:       'https://localhost:8443/login',
-    USERS_URL:      'https://localhost:8443/users',
-    CARD_TYPES_URL: 'https://localhost:8443/api/v0.1/CardTypes',
-    CARDS_URL:      'https://localhost:8443/cards',
-    LOAN_TYPES_URL: 'https://localhost:8443/api/v0.1/LoanTypes',
-    LOANS_URL:      'https://localhost:8443/loans',
+    AUTH_URL:       'http://ss-alb-1047376244.us-east-1.elb.amazonaws.com:53440/login',
+    USERS_URL:      'http://ss-alb-1047376244.us-east-1.elb.amazonaws.com:8443/users',
+    CARD_TYPES_URL: 'http://ss-alb-1047376244.us-east-1.elb.amazonaws.com:8083/api/v0.1/CardTypes',
+    CARDS_URL:      'http://ss-alb-1047376244.us-east-1.elb.amazonaws.com:8083/api/v0.1/CardTypes',
+    LOAN_TYPES_URL: 'http://ss-alb-1047376244.us-east-1.elb.amazonaws.com:8084/api/v0.1/LoanTypes',
+    LOANS_URL:      'http://ss-alb-1047376244.us-east-1.elb.amazonaws.com:8084/api/v0.1/LoanTypes',
 };
 
 /*
