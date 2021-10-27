@@ -81,6 +81,7 @@
     </div>
 </main>
 
+<!-- Modal for making loan payments -->
 <ng-template #infoModal let-c="close" let-d="dismiss">
 
     <div class="modal-dialog">
@@ -105,15 +106,15 @@
                     </p>
 
                     <div class="w-75">
-                        <label for="account" class="form-label">Pay from account</label>
-                        <select class="form-select" id="account" formControlName="account" (change)="onChange($event)">
+                        <label for="originId" class="form-label">Pay from account</label>
+                        <select class="form-select" id="originId" formControlName="originId" (change)="onChange($event)">
                             <option *ngFor="let option of options" [value]="option.value">
                                 {{option.text}}
                             </option>
                         </select>
                     </div>
                     <div class="w-50">
-                        <div *ngIf="showError('account')" class="invalid-feedback float-end">
+                        <div *ngIf="showError('originId')" class="invalid-feedback float-end">
                             Valid account is required.
                         </div>
                     </div>

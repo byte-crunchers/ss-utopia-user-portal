@@ -46,7 +46,7 @@ export class LoansComponent implements OnInit {
     }
 
     openModal(content: any, i: any) {
-        this.modalHeader = this.loans[i].loanName;
+        this.modalHeader = this.loans[i].id;
         this.modalImage = this.images[i];
 
         this.modalInfo = [];

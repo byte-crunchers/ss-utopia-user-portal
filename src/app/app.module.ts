@@ -88,6 +88,7 @@ import { AccounttransactionComponent } from './accounttransaction/accounttransac
         JwtHelperService,
         PhonePipe,
         DecimalPipe,
+        Last4Pipe,
         DatePipe
     ],
     bootstrap: [AppComponent]

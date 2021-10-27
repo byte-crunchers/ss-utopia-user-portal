@@ -43,8 +43,8 @@ export class LoanStatusComponent implements OnInit {
 
     //define form field validators
     paymentForm = this.fb.group({
-        loanId: [''],
-        account: ['', Validators.required],
+        destinationId: [''],
+        originId: ['', Validators.required],
         amount: ['', [Validators.required, Validators.pattern(/^[\d\.]+$/)]],
     });
 
@@ -149,9 +149,9 @@ export class LoanStatusComponent implements OnInit {
 
         //autofill input fields
         this.setAccountOptions();
-        this.paymentForm.patchValue({ account: this.accounts[0].accountId });
+        this.paymentForm.patchValue({ originId: this.accounts[0].accountId });
 
-        this.paymentForm.patchValue({ loanId: this.loans[i].loanId });
+        this.paymentForm.patchValue({ destinationId: this.loans[i].loanId });
         let p = this.decimalPipe.transform(this.loans[i].paymentDue, '1.2-2');
         if (p)
             this.paymentForm.patchValue({ amount: p.replace(',', '') });
@@ -181,7 +181,7 @@ export class LoanStatusComponent implements OnInit {
         this.showSpinner = true;
 
         //update account balance
-        this.httpService.postForm(`${environment.ACCOUNTS_URL}` + '/payment', fields).subscribe(
+        this.httpService.postForm(`${environment.ACCOUNTS_URL}` + '/loanpayment', fields).subscribe(
             (response: any) => {
                 console.log("Account balance updated!");
 
@@ -214,8 +214,8 @@ export class LoanStatusComponent implements OnInit {
         return this.paymentForm.valid;
     }
 
-    //enable pay button only when status is active
+    //enable pay button only when status is active & balance isn't 0
     enablePay(i: any): boolean {
-        return this.loans[i].statusTxt == "Active";
+        return this.loans[i].statusTxt == "Active" && this.loans[i].balance > 0;
     }
 }

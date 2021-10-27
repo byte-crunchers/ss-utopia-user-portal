@@ -88,16 +88,16 @@ export class LoanSignupComponent implements OnInit {
         this.httpService.getAll(`${environment.LOAN_TYPES_URL}`).subscribe((res) => {
             this.loans = res;
             this.loan = this.loans[this.loanTypeId];
-            this.signupForm.patchValue({ loanType: this.loan.loanName });
+            this.signupForm.patchValue({ loanType: this.loan.id });
 
-            this.loanImage = this.loan.loanName.toLowerCase().replace(" ", "_") + ".jpg";
+            this.loanImage = this.loan.id.toLowerCase().replace(" ", "_") + ".jpg";
             this.setTermOptions();
         });
     }
 
     //set choices for term length, in months
     setTermOptions() {
-        let increment = (this.loan.loanName == "Payday Loan" ? 1 : 12);
+        let increment = (this.loan.id == "Payday Loan" ? 1 : 12);
         let size = (this.loan.termMax - this.loan.termMin) / increment + 1;
 
         this.options = new Array(size + 1);

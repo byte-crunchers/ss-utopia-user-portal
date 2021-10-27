@@ -25,7 +25,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let x of loans; let i=index">
-                            <td>{{x.loanName}}</td>
+                            <td>{{x.id}}</td>
                             <td>{{x.lowerRange | apr | percent:'1.0-5'}}</td>
                             <td>{{x.upperRange | apr | percent:'1.0-5'}}</td>
                             <td>{{x.termMin}} months</td>
