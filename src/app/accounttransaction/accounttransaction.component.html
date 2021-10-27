@@ -1,0 +1,21 @@
+<div class="container mt-5">
+<table mdbTable class="table table-hover table-responsive-md">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Memo</th>
+      <th scope="col">Value</th>
+      <th scope="col">Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr mdbTableCol *ngFor="let t of transaction">
+      <td>{{t.date}}</td>
+      <td>{{t.memo}}</td>
+      <td *ngIf="t.value < 0" class="text-danger">${{t.value*-1}}</td>
+      <td *ngIf="t.value >= 0" class="text-success">${{t.value}}</td>
+      <td>${{t.balance}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

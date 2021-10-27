@@ -38,6 +38,7 @@ import { PaymentSuccessComponent } from './payment-success/payment-success.compo
 import { DatePipe } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
 import { PasswordrecoveryComponent } from './passwordrecovery/passwordrecovery.component';
+import { AccounttransactionComponent } from './accounttransaction/accounttransaction.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { PasswordrecoveryComponent } from './passwordrecovery/passwordrecovery.c
         Last4Pipe,
         PaymentSuccessComponent,
         ProfileComponent,
-        PasswordrecoveryComponent
+        PasswordrecoveryComponent,
+        AccounttransactionComponent
     ],
     imports: [
         BrowserModule,

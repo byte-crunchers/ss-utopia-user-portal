@@ -20,6 +20,7 @@ import { CardStatusComponent } from './card-status/card-status.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PasswordrecoveryComponent } from './passwordrecovery/passwordrecovery.component';
+import { AccounttransactionComponent } from './accounttransaction/accounttransaction.component';
 
 
 const routes: Routes = [
@@ -118,6 +119,10 @@ const routes: Routes = [
             {
                 path: 'passwordrecovery',
                 component: PasswordrecoveryComponent
+            },
+            {
+                path: 'accounttransaction',
+                component: AccounttransactionComponent
             },
             {  //redirect invalid urls to home page
                 path: '**',
