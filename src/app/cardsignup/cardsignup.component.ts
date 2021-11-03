@@ -68,7 +68,7 @@ export class CardSignupComponent implements OnInit {
             this.cards = [];
             this.loadAllCards();
         });
-        
+
         //auto format phone number
         this.signupForm.valueChanges.subscribe(val => {
             if (typeof val.phone === 'string') {
@@ -114,14 +114,30 @@ export class CardSignupComponent implements OnInit {
         console.log('Submitting card signup form...');
         this.showSpinner = true;
 
-        this.httpService.postForm(`${environment.CARDS_URL}`, fields).subscribe(
-            (response: any) => {
-                console.log("Form saved successfully!");
-                this.router.navigateByUrl('/cards/approved');
-            }, error => {
-                console.log("Form submit failed - Status " + error.status);
-            }
-        );
+        // this.httpService.postForm(`${environment.CARDS_URL}`, fields).subscribe(
+        //     (response: any) => {
+        //         console.log("Form saved successfully!");
+        //         this.router.navigateByUrl('/cards/approved');
+        //     }, error => {
+        //         console.log("Form submit failed - Status " + error.status);
+        //     }
+        // );
+
+      this.httpService.postForm(`${environment.CARDS_URL}`, fields).toPromise()
+        .then((res:any)=>{
+          let newCardID = res.headers.get('Location').toString().replace(environment.CARDS_URL+"/",'');
+          console.log(newCardID)
+          this.httpService.signUpEmailConfirm(`${environment.EMAILCONFIRM_CARD}`,{ "email":`${this.user.email}`,
+            "firstName":`${this.user.first_name}`,
+            "account_id":`${newCardID}`})
+            .toPromise().then(res=>{
+            console.log("Form saved successfully!")
+            this.router.navigateByUrl('/cards/approved')
+          },error => {
+              console.log("Form submit failed - Status " + error.status);
+          })
+    })
+
     };
 
     //enable submit button when all fields are valid
