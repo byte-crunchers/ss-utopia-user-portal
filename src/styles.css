@@ -11,3 +11,9 @@
       scroll-behavior: auto;
     }
   }
+
+/* loan payment history modal */
+.myCustomModalClass .modal-dialog {
+    max-width: 650px;
+  }
+
