@@ -21,7 +21,7 @@ pipeline {
       stage('Build') {
             steps {
               nodejs("Node-17") {
-                sh "npm install"
+                sh "npm install --legacy-peer-deps"
                 sh "npm run build"
               }
               
