@@ -20,8 +20,11 @@ pipeline {
 
       stage('Build') {
             steps {
-              sh "npm install"
-              sh "npm run build"
+              nodejs("Node-17") {
+                sh "npm install"
+                sh "npm run build"
+              }
+              
             }
         }
       
