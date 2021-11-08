@@ -31,6 +31,8 @@ import { LoanApprovedComponent } from './loanapproved/loanapproved.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PasswordrecoveryComponent } from './passwordrecovery/passwordrecovery.component';
 import { AccounttransactionComponent } from './accounttransaction/accounttransaction.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
     declarations: [
@@ -66,7 +68,9 @@ import { AccounttransactionComponent } from './accounttransaction/accounttransac
         ReactiveFormsModule,
         BrowserAnimationsModule,
         MatProgressSpinnerModule,
-        NgbModule
+        NgbModule,
+        Ng2SearchPipeModule,
+        NgxPaginationModule
     ],
     providers: [
         HttpService,

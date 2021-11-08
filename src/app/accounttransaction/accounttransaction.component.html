@@ -1,21 +1,26 @@
 <div class="container mt-5">
-<table mdbTable class="table table-hover table-responsive-md">
+  <div class="form-group">
+      <input type="text" class="form-control float-left" placeholder="Search..." [(ngModel)]="filterTerm">
+      <button (click)="ReverseOrder()" class="btn btn-primary">Reverse Order</button>
+  </div>
+<table mdbTable class="table table-hover table-responsive-md" id="searchTextResults">
   <thead>
     <tr>
       <th scope="col">Date</th>
       <th scope="col">Memo</th>
       <th scope="col">Value</th>
-      <th scope="col">Balance</th>
     </tr>
   </thead>
   <tbody>
-    <tr mdbTableCol *ngFor="let t of transaction">
+    <tr mdbTableCol *ngFor="let t of transactions | filter:filterTerm | paginate: {
+      itemsPerPage: 10, currentPage: page}">
       <td>{{t.date}}</td>
       <td>{{t.memo}}</td>
       <td *ngIf="t.value < 0" class="text-danger">${{t.value*-1}}</td>
       <td *ngIf="t.value >= 0" class="text-success">${{t.value}}</td>
-      <td>${{t.balance}}</td>
     </tr>
   </tbody>
 </table>
+
+<pagination-controls (pageChange)="handlePageChange($event)"></pagination-controls>
 </div>

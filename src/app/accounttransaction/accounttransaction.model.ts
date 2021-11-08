@@ -5,3 +5,10 @@ export interface Transaction {
   value: number;
   balance: number;
 }
+
+export interface Transactions {
+  id: number;
+  date: string;
+  memo: string;
+  value: string;
+}
