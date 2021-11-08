@@ -14,7 +14,7 @@ pipeline {
 
       stage('Code analysis') {
         steps {
-
+          echo "code analysis"
         }
       }   
 
