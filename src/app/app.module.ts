@@ -39,6 +39,7 @@ import { DatePipe } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
 import { PasswordrecoveryComponent } from './passwordrecovery/passwordrecovery.component';
 import { AccounttransactionComponent } from './accounttransaction/accounttransaction.component';
+import { StatusPipe } from './shared/custom/status.pipe';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { AccounttransactionComponent } from './accounttransaction/accounttransac
         PaymentSuccessComponent,
         ProfileComponent,
         PasswordrecoveryComponent,
-        AccounttransactionComponent
+        AccounttransactionComponent,
+        StatusPipe
     ],
     imports: [
         BrowserModule,
