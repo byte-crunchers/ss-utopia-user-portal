@@ -7,6 +7,7 @@ import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PhonePipe } from '../shared/custom/phone.pipe';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import {mergeMap} from "rxjs/operators";
 
 @Component({
     selector: 'app-loansignup',
@@ -166,17 +167,23 @@ export class LoanSignupComponent implements OnInit {
             return;
         }
 
+
         console.log('Submitting loan signup form...');
         this.showSpinner = true;
 
-        this.httpService.postForm(`${environment.LOANS_URL}`, fields).subscribe(
-            (response: any) => {
-                console.log("Form saved successfully!");
-                this.router.navigateByUrl('/loans/approved');
-            }, error => {
-                console.log("Form submit failed - Status " + error.status);
-            }
-        );
+      this.httpService.postForm(`${environment.LOANS_URL}`, fields).toPromise()
+        .then((res:any)=>{
+          let newloanID = res.headers.get('Location').toString().replace(environment.LOANS_URL+"/",'');
+          console.log(newloanID)
+          this.httpService.signUpEmailConfirm(`${environment.EMAILCONFIRM_LOAN}`,{ "email":`${this.user.email}`,
+               "firstName":`${this.user.first_name}`,
+              "loan_id":`${newloanID}`})
+            .toPromise().then(res=>{
+            console.log("Form saved successfully!")
+            this.router.navigateByUrl('/loans/approved')
+    })
+  })
+
     }
 
     //enable submit button when all fields are valid

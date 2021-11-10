@@ -27,6 +27,15 @@ export class HttpService {
         });
     }
 
+    //email confirm for signups
+    signUpEmailConfirm(url: any, fields: any){
+      return this.http.post(
+        url,
+        fields,
+        {responseType: 'text'}
+      );
+    }
+
     // submit card/loan application form
     postForm(url: any, fields: any) {
         let myHeaders: HttpHeaders = this.jwtHeader();
