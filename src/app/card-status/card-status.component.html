@@ -72,7 +72,7 @@
                         <p>Status: {{card.statusTxt}} </p>
                         <div *ngIf="!card.accountType.includes('Debit'); else elseBlock">
                             <p>Balance: ${{card.balance | number:'1.2-2'}}</p>
-                            <p>APR: {{card.debtInterest | apr | percent:'1.0-2'}}</p>
+                            <p>APR: {{card.debtInterest | percent:'1.0-2'}}</p>
                             <p>Credit Limit: ${{card.creditLimit | number:'1.2-2'}}</p>
                             <p>Payment Due: ${{card.paymentDue | number:'1.2-2'}}</p>
                             <p>Due Date: {{card.dueDate | date: 'yyyy-MM-dd'}}</p>

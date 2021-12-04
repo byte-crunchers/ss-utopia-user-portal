@@ -134,7 +134,7 @@ export class LoanSignupComponent implements OnInit {
             let scale = (t - this.loan.termMin) / (this.loan.termMax - this.loan.termMin)
             this.interestRate = this.loan.lowerRange + (this.loan.upperRange - this.loan.lowerRange) * (1 - scale);
 
-            let r = this.interestRate;  //monthly rate
+            let r = this.interestRate / 12;  //monthly rate
             let e = Math.pow(1 + r, t);
 
             this.result = p * r * e / (e - 1);  //monthly payment
