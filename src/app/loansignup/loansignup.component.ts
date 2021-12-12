@@ -158,33 +158,39 @@ export class LoanSignupComponent implements OnInit {
     }
 
     //submit button
-    submit(fields: any) {
+  // submit(fields: any) {
+  //   console.log('Submitting loan signup form...');
+  //   this.showSpinner = true;
+  //
+  //   if(fields.income < 30000)
+  //   {
+  //     alert("Your income is too low to qualify for a loan.")
+  //     return;
+  //   }
+  //
+  //   this.httpService.postForm(`${environment.LOANS_URL}` + '/form', fields).subscribe(
+  //     (response: any) => {
+  //       console.log("Form saved successfully!");
+  //       this.router.navigateByUrl('/loans/approved');
+  //     }, error => {
+  //       console.log("Form submit failed - Status " + error.status);
+  //     }
+  //   );
+  // }
 
-        //income filter
-        if(fields.income < 30000)
-        {
-            alert("Your income is too low to qualify for a loan.")
-            return;
-        }
 
 
-        console.log('Submitting loan signup form...');
-        this.showSpinner = true;
+  submit(fields: any) {
 
-      this.httpService.postForm(`${environment.LOANS_URL}`, fields).toPromise()
-        .then((res:any)=>{
-          let newloanID = res.headers.get('Location').toString().replace(environment.LOANS_URL+"/",'');
-          console.log(newloanID)
-          this.httpService.signUpEmailConfirm(`${environment.EMAILCONFIRM_LOAN}`,{ "email":`${this.user.email}`,
-               "firstName":`${this.user.first_name}`,
-              "loan_id":`${newloanID}`})
-            .toPromise().then(res=>{
-            console.log("Form saved successfully!")
-            this.router.navigateByUrl('/loans/approved')
-    })
-  })
-
+    this.httpService.postForm(`${environment.LOANS_URL}`, fields).toPromise()
+      .then((res:any)=>{
+        console.log("Form saved successfully!");
+        this.router.navigateByUrl('/cards/approved');
+      }, error => {
+        console.log("Form submit failed - Status " + error.status);
+      })
     }
+
 
     //enable submit button when all fields are valid
     enableSubmit(): boolean {
