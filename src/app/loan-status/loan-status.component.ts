@@ -24,6 +24,8 @@ export class LoanStatusComponent implements OnInit {
         public router: Router
     ) { }
 
+    payments: any;
+    totalPayments = 0;
     accounts: any;
     loans: any;
     totalLoans = 0;
@@ -77,6 +79,35 @@ export class LoanStatusComponent implements OnInit {
         console.log("Account balance = " + this.selectedBalance);
     }
 
+    //get all payments for 1 loan
+    loadPayments(loanId: number, balance: number) {
+        this.payments = [];  //empty the array while it's loading
+        this.showSpinner = true;
+
+        this.httpService.getAll(`${environment.LOANS_URL}` + '/payments/' + loanId).subscribe((res) => {
+            this.showSpinner = false;
+            if(res == null) {  
+                //no payments exist
+                this.totalPayments = 0;
+            }
+            else {  
+                //loan has some existing payments
+                this.payments = res;
+                this.totalPayments = this.payments.length;
+
+                //retroactively fill in the 'remaining balance' column
+                let b = balance;
+                for(let i=this.payments.length-1; i>=0; i--) {
+                    this.payments[i].balance = b;
+                    b += this.payments[i].amount;
+                }
+
+            }
+        }, error => {
+            console.log("Could not get payments - Status " + error.status);
+        });
+    }
+
     //get accounts by user ID
     loadAllAccounts() {
         this.httpService.getAll(`${environment.CARDS_URL}` + '/debit/' + this.authService.userId).subscribe((res) => {
@@ -128,7 +159,7 @@ export class LoanStatusComponent implements OnInit {
         this.modalRef.close();
     }
 
-    openModal(content: any, i: any) {
+    openPaymentModal(content: any, i: any) {
         this.modalHeader = this.loans[i].loanType;
         this.modalImage = this.loans[i].loanType.toLowerCase().replace(" ", "_") + ".jpg";
 
@@ -157,6 +188,25 @@ export class LoanStatusComponent implements OnInit {
             this.paymentForm.patchValue({ amount: p.replace(',', '') });
     }
 
+    openHistoryModal(content: any, i: any) {
+        this.loadPayments(this.loans[i].loanId, this.loans[i].balance);
+
+        this.modalHeader = this.loans[i].loanType;
+        this.modalImage = this.loans[i].loanType.toLowerCase().replace(" ", "_") + ".jpg";
+        
+        this.modalInfo = [];
+
+        this.modalRef = this.modalService.open(content, { windowClass : "myCustomModalClass"});
+        this.modalRef.result.then(
+            (result) => {
+                this.errMsg = '';
+            },
+            (reason) => {
+                this.errMsg = 'Unable to serivce';
+            }
+        );
+    }
+
     //changed account selection dropdown
     onChange(event: any) {
         for (let i = 0; i < this.accounts.length; i++) {
@@ -167,7 +217,7 @@ export class LoanStatusComponent implements OnInit {
         }
     }
 
-    //submit button
+    //submit payment button
     submit(fields: any) {
 
         //check minimum payment amount
@@ -218,4 +268,5 @@ export class LoanStatusComponent implements OnInit {
     enablePay(i: any): boolean {
         return this.loans[i].statusTxt == "Active" && this.loans[i].balance > 0;
     }
+
 }

@@ -53,7 +53,7 @@
                         </mat-expansion-panel-header>
 
 
-                        <!-- <p class="float-end text-black-50">ID: {{loan.loanId}}</p> -->
+                        <p class="float-end text-black-50">ID: {{loan.loanId}}</p>
                         <p>Status: {{loan.statusTxt}} </p>
                         <p>Balance: ${{loan.balance | number:'1.2-2'}}</p>
                         <p>APR: {{loan.interestRate | apr | percent:'1.0-2'}}</p>
@@ -61,8 +61,12 @@
                         <p>Payment Due: ${{loan.paymentDue | number:'1.2-2'}}</p>
                         <p>Due Date: {{loan.dueDate}}</p>
 
-                        <button class="float-end btn btn-primary btn-sm" (click)="openModal(infoModal, loan.index)"
+                        <button class="float-end btn btn-primary btn-sm" (click)="openPaymentModal(paymentModal, loan.index)"
                             [disabled]="!this.enablePay(loan.index)">Pay Loan</button>
+                        <div class="float-end">&nbsp;&nbsp;</div>
+                        <button class="float-end btn btn-secondary btn-sm"
+                            (click)="openHistoryModal(historyModal, loan.index)">Payment History</button>
+
                     </mat-expansion-panel>
                 </div>
             </mat-accordion>
@@ -82,7 +86,7 @@
 </main>
 
 <!-- Modal for making loan payments -->
-<ng-template #infoModal let-c="close" let-d="dismiss">
+<ng-template #paymentModal let-c="close" let-d="dismiss">
 
     <div class="modal-dialog">
         <h4 class="text-center">Loan Payment</h4>
@@ -148,6 +152,71 @@
                 </div>
 
             </form>
+
+        </div>
+    </div>
+
+</ng-template>
+
+
+<!-- Modal for viewing loan payment history -->
+<ng-template #historyModal let-c="close" let-d="dismiss">
+
+    <div class="modal-dialog">
+        <h4 class="text-center">Payment History</h4>
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <img class="w-50 mx-auto" src="/assets/{{modalImage}}">
+
+            </div>
+            <div class="modal-body">
+                <h4 class="modal-title">{{modalHeader}}</h4><br>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Account</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Balance</th>
+                        </tr>
+                    </thead>
+                </table>
+                <div class="table-wrapper">
+                    <div *ngIf="!this.showSpinner; else elseBlock3">
+                        <div *ngIf="this.totalPayments > 0; else elseBlock2">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr *ngFor="let x of payments; let i=index">
+                                        <td>{{x.time_stamp | date:'M/d/yyyy'}}</td>
+                                        <td>{{x.account_id}}</td>
+                                        <td>${{x.amount | number:'1.2-2'}}</td>
+                                        <td>{{x.status | status}}</td>
+                                        <td>${{x.balance | number:'1.2-2'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ng-template #elseBlock2>
+                            <br />
+                            No payments to display.
+                        </ng-template>   
+                    </div>     
+                    <ng-template #elseBlock3>
+                        <br /><br />
+                        <mat-spinner diameter="55" style="margin:0 auto;"></mat-spinner>
+                    </ng-template>    
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="closeModal()">Close</button>
+            </div>
+
 
         </div>
     </div>
