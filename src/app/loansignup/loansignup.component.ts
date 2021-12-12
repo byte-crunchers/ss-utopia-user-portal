@@ -185,7 +185,7 @@ export class LoanSignupComponent implements OnInit {
     this.httpService.postForm(`${environment.LOANS_URL}`, fields).toPromise()
       .then((res:any)=>{
         console.log("Form saved successfully!");
-        this.router.navigateByUrl('/cards/approved');
+        this.router.navigateByUrl('/loans/approved');
       }, error => {
         console.log("Form submit failed - Status " + error.status);
       })
