@@ -85,6 +85,12 @@
                             <button class="float-end btn btn-secondary btn-sm"
                                 (click)="openReportModal(reportModal, card.index)"
                                 [disabled]="!this.enableReport(card.index)">Report Stolen</button>
+                          <div class="float-end">&nbsp;&nbsp;</div>
+
+                          <button class="float-end btn btn-warning btn-sm"
+                                  (click)="openRequestNewCardModal(requestNewCardModal, card.index)"
+                                  [disabled]="!this.enableReport(card.index)">Request New Card</button>
+
                         </div>
                         <ng-template #elseBlock>
                             <p>Checking balance: ${{card.balance | number:'1.2-2'}}</p>
@@ -214,6 +220,7 @@
                 </p>
 
             </div>
+
             <div class="modal-footer">
                 <div *ngIf="!this.showSpinner; else elseBlock">
                     <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
@@ -233,3 +240,53 @@
     </div>
 
 </ng-template>
+
+<ng-template #requestNewCardModal let-c="close" let-d="dismiss">
+
+  <div class="modal-dialog">
+    <h4 class="text-center">Request a new physical card</h4>
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <img class="w-50 mx-auto" src="/assets/{{modalImage}}">
+
+      </div>
+      <div class="modal-body">
+        <h4 class="modal-title">{{modalHeader}}</h4><br>
+
+        <!-- <p>Account ID: {{modalInfo[0]}}</p> -->
+
+        <p>
+          <!-- exclamation icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="red"
+               class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+            <path
+              d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+          </svg>
+
+          Please destroy this card, a new card will be arrived within 7 businesses days.
+        </p>
+
+      </div>
+
+      <div class="modal-footer">
+        <div *ngIf="!this.showSpinner; else elseBlock">
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"
+                  (click)="submitRequest(modalInfo[0])">Confirm</button>
+          &nbsp;
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                  (click)="closeModal()">Cancel</button>
+        </div>
+        <ng-template #elseBlock>
+          <mat-spinner diameter="55" style="margin:0 auto;"></mat-spinner>
+        </ng-template>
+
+      </div>
+
+
+    </div>
+  </div>
+
+</ng-template>
+

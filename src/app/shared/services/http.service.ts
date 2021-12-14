@@ -27,6 +27,15 @@ export class HttpService {
         });
     }
 
+    //
+  newCardRequest(url: any,fields: any) {
+
+      // console.log(this.jwtHeader())
+    return this.http.post(url,
+      fields,{headers: this.jwtHeader()});
+  }
+
+
     //email confirm for signups
     signUpEmailConfirm(url: any, fields: any){
       return this.http.post(
