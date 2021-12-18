@@ -16,7 +16,6 @@
                         <tr>
                             <th scope="col">Card Name</th>
                             <th scope="col">Annual Fee</th>
-                            <!-- <th scope="col">APR</th> -->
                             <th scope="col">Cash Back</th>
                             <th scope="col">Foodie Points</th>
                             <th scope="col">Late Fee</th>
@@ -26,8 +25,7 @@
                         <tr *ngFor="let x of cards; let i=index">
                             <td>{{x.id}}</td>
                             <td>${{x.annual_fee}}</td>
-                            <!-- <td>{{x.apr | percent:'1.0-5'}}</td> -->
-                            <td>{{x.cashBack | percent:'1.0-5'}}</td>
+                            <td>{{x.cashback | percent:'1.0-5'}}</td>
                             <td>{{x.foodie_pts | percent:'1.0-5'}}</td>
                             <td>${{x.late_fee}}</td>
                         </tr>

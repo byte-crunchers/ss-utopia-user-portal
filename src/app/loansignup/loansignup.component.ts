@@ -7,7 +7,7 @@ import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PhonePipe } from '../shared/custom/phone.pipe';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import {mergeMap} from "rxjs/operators";
+import { mergeMap } from "rxjs/operators";
 
 @Component({
     selector: 'app-loansignup',
@@ -91,14 +91,14 @@ export class LoanSignupComponent implements OnInit {
             this.loan = this.loans[this.loanTypeId];
             this.signupForm.patchValue({ loanType: this.loan.id });
 
-            this.loanImage = this.loan.id.toLowerCase().replace(" ", "_") + ".jpg";
+            this.loanImage = this.loan.id.toLowerCase().replace(" ", "_") + "_loan.jpg";
             this.setTermOptions();
         });
     }
 
     //set choices for term length, in months
     setTermOptions() {
-        let increment = (this.loan.id == "Payday Loan" ? 1 : 12);
+        let increment = (this.loan.id == "Payday" ? 1 : 12);
         let size = (this.loan.termMax - this.loan.termMin) / increment + 1;
 
         this.options = new Array(size + 1);
@@ -112,7 +112,7 @@ export class LoanSignupComponent implements OnInit {
 
     //autofill form with user info
     loadUserInfo() {
-        this.httpService.getAll(`${environment.ACCOUNTS_URL}` + '/userinfo/' + this.authService.name).subscribe((res: any) => {
+        this.httpService.getAll(`${environment.USERS_URL}` + '/userinfo/' + this.authService.userId).subscribe((res: any) => {
             this.user = res[0];
             this.signupForm.patchValue({ userId: this.authService.userId });
             this.signupForm.patchValue({ firstName: this.user.first_name });
@@ -161,8 +161,7 @@ export class LoanSignupComponent implements OnInit {
     submit(fields: any) {
 
         //income filter
-        if(fields.income < 30000)
-        {
+        if (fields.income < 30000) {
             alert("Your income is too low to qualify for a loan.")
             return;
         }
@@ -171,18 +170,26 @@ export class LoanSignupComponent implements OnInit {
         console.log('Submitting loan signup form...');
         this.showSpinner = true;
 
-      this.httpService.postForm(`${environment.LOANS_URL}`, fields).toPromise()
-        .then((res:any)=>{
-          let newloanID = res.headers.get('Location').toString().replace(environment.LOANS_URL+"/",'');
-          console.log(newloanID)
-          this.httpService.signUpEmailConfirm(`${environment.EMAILCONFIRM_LOAN}`,{ "email":`${this.user.email}`,
-               "firstName":`${this.user.first_name}`,
-              "loan_id":`${newloanID}`})
-            .toPromise().then(res=>{
-            console.log("Form saved successfully!")
-            this.router.navigateByUrl('/loans/approved')
-    })
-  })
+        this.httpService.postForm(`${environment.LOANS_URL}`, fields).toPromise()
+            .then((res: any) => {
+                console.log("Form saved successfully!");
+                this.router.navigateByUrl('/loans/approved');
+            }, error => {
+                console.log("Form submit failed - Status " + error.status);
+            })
+
+        //       this.httpService.postForm(`${environment.LOANS_URL}`, fields).toPromise()
+        //         .then((res:any)=>{
+        //           let newloanID = res.headers.get('Location').toString().replace(environment.LOANS_URL+"/",'');
+        //           console.log(newloanID)
+        //           this.httpService.signUpEmailConfirm(`${environment.EMAILCONFIRM_LOAN}`,{ "email":`${this.user.email}`,
+        //                "firstName":`${this.user.first_name}`,
+        //               "loan_id":`${newloanID}`})
+        //             .toPromise().then(res=>{
+        //             console.log("Form saved successfully!")
+        //             this.router.navigateByUrl('/loans/approved')
+        //     })
+        //   })
 
     }
 

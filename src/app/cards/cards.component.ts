@@ -19,8 +19,8 @@ export class CardsComponent implements OnInit {
     modalHeader = "";
     modalImage = "";
     modalInfo: any;
-    images = ["basic_credit.png", "platinum_credit.png", "plus_credit.png", "foodies_credit.png", "utopia_debit.png"];
-    index = [0, 1, 2, 3, 4];  //display order
+    images = ["basic_credit.png", "utopia_debit.png", "blank_card", "foodies_credit.png", "platinum_credit.png", "plus_credit.png", "blank_card"];
+    index = [0, 4, 5, 3, 1];  //display order
 
     //modal variables
     modalRef!: NgbModalRef;
@@ -52,7 +52,7 @@ export class CardsComponent implements OnInit {
 
         this.modalInfo = [];
         this.modalInfo[0] = this.cards[i].annual_fee;
-        this.modalInfo[1] = this.cards[i].cashBack;
+        this.modalInfo[1] = this.cards[i].cashback;
         this.modalInfo[2] = this.cards[i].foodie_pts;
         this.modalInfo[3] = this.cards[i].late_fee;
 

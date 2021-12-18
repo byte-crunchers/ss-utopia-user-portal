@@ -96,7 +96,7 @@ export class LoanStatusComponent implements OnInit {
                 this.totalPayments = this.payments.length;
 
                 //retroactively fill in the 'remaining balance' column
-                let b = balance;
+                let b = -balance;
                 for(let i=this.payments.length-1; i>=0; i--) {
                     this.payments[i].balance = b;
                     b += this.payments[i].amount;
@@ -128,6 +128,7 @@ export class LoanStatusComponent implements OnInit {
     setStatuses() {
         for (let i = 0; i < this.loans.length; i++) {
             this.loans[i].index = i;
+            this.loans[i].image = this.loans[i].loanType.toLowerCase().replace(" ", "_") + "_loan.jpg";
 
             //set status text & icon
             if (!this.loans[i].approved) {
@@ -160,11 +161,11 @@ export class LoanStatusComponent implements OnInit {
     }
 
     openPaymentModal(content: any, i: any) {
-        this.modalHeader = this.loans[i].loanType;
-        this.modalImage = this.loans[i].loanType.toLowerCase().replace(" ", "_") + ".jpg";
+        this.modalHeader = this.loans[i].loanType + " Loan";
+        this.modalImage = this.loans[i].loanType.toLowerCase().replace(" ", "_") + "_loan.jpg";
 
         this.modalInfo = [];
-        this.modalInfo[0] = this.loans[i].balance;
+        this.modalInfo[0] = -this.loans[i].balance;
         this.modalInfo[1] = this.loans[i].paymentDue;
         this.modalInfo[2] = this.loans[i].dueDate;
 
@@ -191,8 +192,8 @@ export class LoanStatusComponent implements OnInit {
     openHistoryModal(content: any, i: any) {
         this.loadPayments(this.loans[i].loanId, this.loans[i].balance);
 
-        this.modalHeader = this.loans[i].loanType;
-        this.modalImage = this.loans[i].loanType.toLowerCase().replace(" ", "_") + ".jpg";
+        this.modalHeader = this.loans[i].loanType + " Loan";
+        this.modalImage = this.loans[i].loanType.toLowerCase().replace(" ", "_") + "_loan.jpg";
         
         this.modalInfo = [];
 
@@ -266,7 +267,7 @@ export class LoanStatusComponent implements OnInit {
 
     //enable pay button only when status is active & balance isn't 0
     enablePay(i: any): boolean {
-        return this.loans[i].statusTxt == "Active" && this.loans[i].balance > 0;
+        return this.loans[i].statusTxt == "Active" && this.loans[i].balance < 0;
     }
 
 }

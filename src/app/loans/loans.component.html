@@ -23,11 +23,11 @@
                             <img src="assets/{{images[i]}}" alt="image">
 
                             <div class="card-body">
-                                <h4>{{loans[i].id}}&nbsp;</h4>
+                                <h4>{{loans[i].id}} Loan</h4>
                                 <p class="card-text">APR: {{loans[i].lowerRange | percent:'1.0-2'}} -
                                     {{loans[i].upperRange | percent:'1.0-2'}}
                                     <br>Term: {{loans[i].termMin}} - {{loans[i].termMax}} months
-                                    <br>Secured: {{loans[i].secured | yesNo}}
+                                    <br>Secured: {{loans[i].isSecured | yesNo}}
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">

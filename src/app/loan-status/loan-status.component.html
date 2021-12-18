@@ -20,7 +20,7 @@
                     <mat-expansion-panel>
                         <mat-expansion-panel-header>
                             <mat-panel-title class="fw-bold">
-                                {{loan.loanType}}
+                                {{loan.loanType}} Loan
                             </mat-panel-title>
 
                             <span *ngIf="loan.icon == -1" class="text-muted">
@@ -52,10 +52,11 @@
 
                         </mat-expansion-panel-header>
 
+                        <img class="minicard float-end" src="/assets/{{loan.image}}">
 
-                        <p class="float-end text-black-50">ID: {{loan.loanId}}</p>
+                        <!-- <p class="float-end text-black-50">ID: {{loan.loanId}}</p> -->
                         <p>Status: {{loan.statusTxt}} </p>
-                        <p>Balance: ${{loan.balance | number:'1.2-2'}}</p>
+                        <p>Balance: ${{-loan.balance | number:'1.2-2'}}</p>
                         <p>APR: {{loan.interestRate | percent:'1.0-2'}}</p>
                         <p>Monthly Payment: ${{loan.monthlyPayment | number:'1.2-2'}}</p>
                         <p>Payment Due: ${{loan.paymentDue | number:'1.2-2'}}</p>

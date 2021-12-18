@@ -49,6 +49,7 @@ export class CardStatusComponent implements OnInit {
         destinationId: [''],  //hidden field
         originId: ['', Validators.required],
         amount: ['', [Validators.required, Validators.pattern(/^[\d\.]+$/)]],
+        memo: ['']
     });
     
     //display error message if the field has been touched & fails validator checks
@@ -201,7 +202,7 @@ export class CardStatusComponent implements OnInit {
         }
 
         //check maximum payment amount
-        if(fields.amount > this.selectedCardBalance) {
+        if(fields.amount > -this.selectedCardBalance) {
             alert('Payment amount cannot be greater than the card balance.');
             return;
         }
@@ -255,7 +256,7 @@ export class CardStatusComponent implements OnInit {
 
     //enable pay button only when status is active & balance isn't 0
     enablePay(i: any): boolean {
-        return this.cards[i].statusTxt == "Active" && this.cards[i].balance > 0;
+        return this.cards[i].statusTxt == "Active" && this.cards[i].balance < 0;
     }
 
     //enable report stolen button only when status is active

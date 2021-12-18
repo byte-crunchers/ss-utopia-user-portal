@@ -18,8 +18,8 @@ export class LoansComponent implements OnInit {
     modalHeader = "";
     modalImage = "";
     modalInfo: any;
-    images = ["mortgage.jpg", "auto_loan.jpg", "student_loan.jpg", "personal_loan.jpg", "payday_loan.jpg"];
-    index = [0, 1, 2, 3, 4];  //display order
+    images = ["auto_loan.jpg", "mortgage_loan.jpg", "payday_loan.jpg", "personal_loan.jpg", "student_loan.jpg"];
+    index = [1, 0, 4, 3, 2];  //display order
 
     //modal variables
     modalRef!: NgbModalRef;
@@ -46,7 +46,7 @@ export class LoansComponent implements OnInit {
     }
 
     openModal(content: any, i: any) {
-        this.modalHeader = this.loans[i].id;
+        this.modalHeader = this.loans[i].id + " Loan";
         this.modalImage = this.images[i];
 
         this.modalInfo = [];
@@ -55,7 +55,7 @@ export class LoansComponent implements OnInit {
         this.modalInfo[2] = this.loans[i].termMax;
         this.modalInfo[3] = this.loans[i].termMin;
         this.modalInfo[4] = this.loans[i].lateFee;
-        this.modalInfo[5] = this.loans[i].secured;
+        this.modalInfo[5] = this.loans[i].isSecured;
 
         this.modalRef = this.modalService.open(content);
         this.modalRef.result.then(
