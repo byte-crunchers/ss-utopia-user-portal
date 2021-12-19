@@ -15,7 +15,6 @@ import { HttpService } from './shared/services/http.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { YesNoPipe } from './shared/custom/usort.pipe';
 import { HighlightDirective } from './shared/custom/highlight.directive';
-import { AprPipe } from './shared/custom/apr.pipe';
 import { PhonePipe } from './shared/custom/phone.pipe';
 import { LoanTableComponent } from './loantable/loantable.component';
 import { LoginComponent } from './login/login.component';
@@ -55,7 +54,6 @@ import { StatusPipe } from './shared/custom/status.pipe';
         FooterComponent,
         YesNoPipe,
         HighlightDirective,
-        AprPipe,
         LoanTableComponent,
         LoginComponent,
         RegisterComponent,

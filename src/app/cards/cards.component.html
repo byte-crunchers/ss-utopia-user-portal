@@ -28,7 +28,7 @@
                                     <span *ngIf="i == 3; else elseBlock">
                                         Foodie Points: {{cards[i].foodie_pts | percent:'1.0-5'}}</span>
                                     <ng-template #elseBlock>
-                                        Cash Back: {{cards[i].cashBack | percent:'1.0-5'}}
+                                        Cash Back: {{cards[i].cashback | percent:'1.0-5'}}
                                     </ng-template><br>
                                     Annual Fee: ${{cards[i].annual_fee}} <br>
                                     Late Fee: ${{cards[i].late_fee}}

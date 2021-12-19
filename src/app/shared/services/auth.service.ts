@@ -13,7 +13,7 @@ export class AuthService {
 
     loginUrl = `${environment.AUTH_URL}`;
     name = "";  // user profile name, printed in website header
-    userId = 1;  //test user
+    userId = -1;  //user id for API calls
 
     constructor(
         private http: HttpClient,
@@ -46,6 +46,7 @@ export class AuthService {
         if (token)  //check not null
         {
             this.name = this.jwtHelper.decodeToken(token).sub;  //set username
+            this.userId = this.jwtHelper.decodeToken(token).id;  //set user id
             return !this.jwtHelper.isTokenExpired(token);  //check expiration
         }
 

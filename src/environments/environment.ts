@@ -4,20 +4,14 @@
 
 export const environment = {
     production: false,
-    AUTH_URL:       'https://localhost:8181/login',
-    ACCOUNTS_URL:   'https://192.168.1.194:8088/api/v0.1/accounts',
-    CARD_TYPES_URL: 'https://192.168.1.194:8088/api/v0.1/accountTypes',
-    CARDS_URL:      'https://192.168.1.194:8088/api/v0.1/cards',
-    LOAN_TYPES_URL: 'https://192.168.1.194:8084/api/v0.1/LoanTypes',
-    LOANS_URL:      'https://192.168.1.194:8084/api/v0.1/Loans',
+    AUTH_URL:          'https://ec2co-ecsel-1o4oi3seehm9q-2102525371.us-east-1.elb.amazonaws.com/login',
+    ACCOUNTS_URL:      'https://3.84.26.113:8088/api/v0.1/accounts',
+    CARD_TYPES_URL:    'https://3.84.26.113:8088/api/v0.1/accountTypes',
+    CARDS_URL:         'https://3.84.26.113:8088/api/v0.1/cards',
+    LOAN_TYPES_URL:    'https://3.84.26.113:8084/api/v0.1/LoanTypes',
+    LOANS_URL:         'https://3.84.26.113:8084/api/v0.1/Loans',
+    USERS_URL:         'https://3.84.26.113:8089',
 
-
-    // AUTH_URL:       'https://localhost:8443/login',
-    // ACCOUNTS_URL:   'https://localhost:8088/api/v0.1/accounts',
-    // CARD_TYPES_URL: 'https://localhost:8088/api/v0.1/accountTypes',
-    // CARDS_URL:      'https://localhost:8088/api/v0.1/cards',
-    // LOAN_TYPES_URL: 'https://localhost:8084/api/v0.1/LoanTypes',
-    // LOANS_URL:      'https://localhost:8084/api/v0.1/Loans',
 };
 
 /*

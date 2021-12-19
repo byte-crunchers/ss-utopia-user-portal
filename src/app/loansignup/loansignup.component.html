@@ -11,7 +11,7 @@
                         required form group has a validation state that can be triggered by attempting to submit the
                         form without completing it.</p>
                     <img class="d-block mx-auto mb-4 shadow-sm" src="/assets/{{loanImage}}">
-                    <h2>&nbsp;{{loan.id}}&nbsp;</h2>
+                    <h2>&nbsp;{{loan.id}} Loan</h2>
                 </div>
 
                 <br>
@@ -62,10 +62,10 @@
                             <br>
                             <h1>${{result | number:'1.0-0'}} / mo</h1>
                             <div *ngIf="result == 0; else aprBlock">
-                                <h5>{{loan.lowerRange | apr | percent:'1.0-2'}} - {{loan.upperRange | apr | percent:'1.0-2'}} APR</h5>
+                                <h5>{{loan.lowerRange | percent:'1.0-2'}} - {{loan.upperRange | percent:'1.0-2'}} APR</h5>
                             </div>
                             <ng-template #aprBlock>
-                                <h5>{{interestRate | apr | percent:'1.0-2'}} APR</h5>
+                                <h5>{{interestRate | percent:'1.0-2'}} APR</h5>
                             </ng-template>
         
                         </div>

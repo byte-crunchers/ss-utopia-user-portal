@@ -70,10 +70,10 @@
 
                         <!-- <p class="float-end text-black-50">Account ID: {{card.accountId}}</p> -->
                         <p>Status: {{card.statusTxt}} </p>
-                        <div *ngIf="!card.accountType.includes('Debit'); else elseBlock">
-                            <p>Balance: ${{card.balance | number:'1.2-2'}}</p>
-                            <p>APR: {{card.debtInterest | apr | percent:'1.0-2'}}</p>
-                            <p>Credit Limit: ${{card.creditLimit | number:'1.2-2'}}</p>
+                        <div *ngIf="!card.accountType.includes('Checking') && !card.accountType.includes('Savings'); else elseBlock">
+                            <p>Balance: ${{-card.balance | number:'1.2-2'}}</p>
+                            <p>APR: {{card.debtInterest | percent:'1.0-2'}}</p>
+                            <p>Credit Limit: ${{-card.creditLimit | number:'1.2-2'}}</p>
                             <p>Payment Due: ${{card.paymentDue | number:'1.2-2'}}</p>
                             <p>Due Date: {{card.dueDate | date: 'yyyy-MM-dd'}}</p>
 
@@ -93,7 +93,7 @@
 
                         </div>
                         <ng-template #elseBlock>
-                            <p>Checking balance: ${{card.balance | number:'1.2-2'}}</p>
+                            <p>Balance: ${{card.balance | number:'1.2-2'}}</p>
 
                             <button class="float-end btn btn-secondary btn-sm"
                                 (click)="openReportModal(reportModal, card.index)"
@@ -135,7 +135,7 @@
                     <h4 class="modal-title">{{modalHeader}}</h4><br>
 
                     <p>
-                        Card Balance: ${{modalInfo[0] | number:'1.2-2'}}<br>
+                        Card Balance: ${{-modalInfo[0] | number:'1.2-2'}}<br>
                         Payment Due: ${{modalInfo[1] | number:'1.2-2'}}<br>
                         Minimum Payment: ${{minPayment | number:'1.2-2'}}<br>
                         Due Date: {{modalInfo[2] | date: 'yyyy-MM-dd'}}
