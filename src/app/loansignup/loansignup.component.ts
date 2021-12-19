@@ -193,6 +193,7 @@ export class LoanSignupComponent implements OnInit {
 
     }
 
+
     //enable submit button when all fields are valid
     enableSubmit(): boolean {
         // return true;

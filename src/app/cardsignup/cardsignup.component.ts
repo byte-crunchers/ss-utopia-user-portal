@@ -125,6 +125,7 @@ export class CardSignupComponent implements OnInit {
 
     //   this.httpService.postForm(`${environment.CARDS_URL}`, fields).toPromise()
     //     .then((res:any)=>{
+    //       console.log(res)
     //       let newCardID = res.headers.get('Location').toString().replace(environment.CARDS_URL+"/",'');
     //       console.log(newCardID)
     //       this.httpService.signUpEmailConfirm(`${environment.EMAILCONFIRM_CARD}`,{ "email":`${this.user.email}`,

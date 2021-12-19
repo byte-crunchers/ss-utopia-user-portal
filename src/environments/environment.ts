@@ -12,11 +12,6 @@ export const environment = {
     LOANS_URL:         'https://3.84.26.113:8084/api/v0.1/Loans',
     USERS_URL:         'https://3.84.26.113:8089',
 
-    EMAILCONFIRM_LOAN: 'http://192.168.1.194:8090/api/v1/signup/loan',
-    EMAILCONFIRM_ACCOUNT: 'http://192.168.1.194:8090/api/v1/signup/account',
-    EMAILCONFIRM_CARD: 'http://192.168.1.194:8090/api/v1/signup/card',
-    EMAILCONFIRM_USER: 'http://192.168.1.194:8090/api/v1/signup/user'
-
 };
 
 /*

@@ -43,7 +43,7 @@ export class CardStatusComponent implements OnInit {
     selectedCardBalance: any;
     selectedAccountBalance: any;
     minPayment = 25;
-    
+
     //define form field validators
     paymentForm = this.fb.group({
         destinationId: [''],  //hidden field
@@ -51,7 +51,7 @@ export class CardStatusComponent implements OnInit {
         amount: ['', [Validators.required, Validators.pattern(/^[\d\.]+$/)]],
         memo: ['']
     });
-    
+
     //display error message if the field has been touched & fails validator checks
     showError(field: string): boolean {
         let x = this.paymentForm.get(field);
@@ -96,7 +96,7 @@ export class CardStatusComponent implements OnInit {
             this.setStatuses();
         })
     }
-    
+
     //set values that are calculated on the front end
     setStatuses() {
         for (let i = 0; i < this.cards.length; i++) {
@@ -124,7 +124,7 @@ export class CardStatusComponent implements OnInit {
                 else
                     this.cards[i].icon = 0;
             }
-            
+
         }
 
     }
@@ -181,7 +181,27 @@ export class CardStatusComponent implements OnInit {
         );
 
     }
-    
+
+  openRequestNewCardModal(content: any, i: any) {
+    this.modalHeader = this.cards[i].accountType + " - " + this.cards[i].cardNum;
+    this.modalImage = this.cards[i].accountType.toLowerCase().replace(" ", "_") + ".png";
+
+    this.modalInfo = [];
+    this.modalInfo[0] = this.cards[i].cardNum;
+
+    this.modalRef = this.modalService.open(content);
+    this.modalRef.result.then(
+      (result) => {
+        this.errMsg = '';
+      },
+      (reason) => {
+        this.errMsg = 'Unable to serivce';
+      }
+    );
+
+  }
+
+
     //changed account selection dropdown
     onChange(event: any) {
         for (let i = 0; i < this.accounts.length; i++) {
@@ -232,7 +252,7 @@ export class CardStatusComponent implements OnInit {
 
     //submit report card as stolen
     submitReport(id: any) {
-        
+
         let json = {
             "accountId": id
         };
@@ -248,7 +268,23 @@ export class CardStatusComponent implements OnInit {
             }
         );
     }
-    
+
+
+    //submit request for new card
+   submitRequest(id: any){
+      this.httpService.newCardRequest(`${environment.CARDS_URL}` + `/${id}`,'').subscribe(
+        (response:any)=>{
+          console.log("new card request successfully!");
+          this.modalRef.close();
+          this.loadAllCards();
+        },error => {
+          console.log("Request failed - Status " + error.status);
+        }
+      );
+   }
+
+
+
     //enable submit button when all fields are valid
     enableSubmit(): boolean {
         return this.paymentForm.valid;
@@ -263,6 +299,6 @@ export class CardStatusComponent implements OnInit {
     enableReport(i: any): boolean {
         return this.cards[i].statusTxt == "Active";
     }
-    
-    
+
+
 }
