@@ -4,13 +4,13 @@
 
 export const environment = {
     production: false,
-    AUTH_URL:          'https://ec2co-ecsel-1o4oi3seehm9q-2102525371.us-east-1.elb.amazonaws.com/login',
-    ACCOUNTS_URL:      'https://3.84.26.113:8088/api/v0.1/accounts',
-    CARD_TYPES_URL:    'https://3.84.26.113:8088/api/v0.1/accountTypes',
-    CARDS_URL:         'https://3.84.26.113:8088/api/v0.1/cards',
-    LOAN_TYPES_URL:    'https://3.84.26.113:8084/api/v0.1/LoanTypes',
-    LOANS_URL:         'https://3.84.26.113:8084/api/v0.1/Loans',
-    USERS_URL:         'https://3.84.26.113:8089',
+    AUTH_URL:          'https://auth.utopia-financial.com/login',
+    ACCOUNTS_URL:      'https://api2.utopia-financial.com:8088/api/v0.1/accounts',
+    CARD_TYPES_URL:    'https://api2.utopia-financial.com:8088/api/v0.1/accountTypes',
+    CARDS_URL:         'https://api2.utopia-financial.com:8088/api/v0.1/cards',
+    LOAN_TYPES_URL:    'https://api2.utopia-financial.com:8084/api/v0.1/LoanTypes',
+    LOANS_URL:         'https://api2.utopia-financial.com:8084/api/v0.1/Loans',
+    USERS_URL:         'https://api2.utopia-financial.com:8089',
 
 };
 
