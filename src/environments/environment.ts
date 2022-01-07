@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    AUTH_URL:          'https://auth.utopia-financial.com/login',
+    AUTH_URL:          'https://api2.utopia-financial.com:8443/login',
     ACCOUNTS_URL:      'https://api2.utopia-financial.com:8088/api/v0.1/accounts',
     CARD_TYPES_URL:    'https://api2.utopia-financial.com:8088/api/v0.1/accountTypes',
     CARDS_URL:         'https://api2.utopia-financial.com:8088/api/v0.1/cards',

@@ -179,10 +179,10 @@
                     <thead>
                         <tr>
                             <th scope="col">Date</th>
-                            <th scope="col">Account</th>
+                            <th scope="col">From Account</th>
                             <th scope="col">Amount</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Balance</th>
+                            <th scope="col">Loan Balance</th>
                         </tr>
                     </thead>
                 </table>
@@ -193,7 +193,7 @@
                                 <tbody>
                                     <tr *ngFor="let x of payments; let i=index">
                                         <td>{{x.time_stamp | date:'M/d/yyyy'}}</td>
-                                        <td>{{x.account_id}}</td>
+                                        <td>Checking</td>
                                         <td>${{x.amount | number:'1.2-2'}}</td>
                                         <td>{{x.status | status}}</td>
                                         <td>${{x.balance | number:'1.2-2'}}</td>

@@ -6,10 +6,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class StatusPipe implements PipeTransform {
     transform(value: number): string {
         switch(value) {
+            case 0:
+                return "Accepted";
             case 1:
                 return "Accepted";
-            case 0:
-                return "Unprocessed";
             case -1:
                 return "Insufficient Funds";
             case -2:

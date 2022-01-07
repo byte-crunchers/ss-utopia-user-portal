@@ -105,7 +105,7 @@ export class CardSignupComponent implements OnInit {
             this.signupForm.patchValue({ address: this.user.street_address });
             this.signupForm.patchValue({ city: this.user.city });
             this.signupForm.patchValue({ state: this.user.us_state });
-            this.signupForm.patchValue({ zip: this.user.zip });
+            this.signupForm.patchValue({ zip: this.user.zip_str });
         });
     }
 
