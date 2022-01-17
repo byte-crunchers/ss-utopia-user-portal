@@ -231,21 +231,13 @@ export class LoanStatusComponent implements OnInit {
         console.log('Submitting loan payment...');
         this.showSpinner = true;
 
-        //update account balance
-        this.httpService.postForm(`${environment.ACCOUNTS_URL}` + '/loanpayment', fields).subscribe(
+        //save payment & update loan balance & update account balance
+        this.httpService.postForm(`${environment.LOANS_URL}` + '/payment', fields).subscribe(
             (response: any) => {
                 console.log("Account balance updated!");
 
-                //save payment & update loan balance
-                this.httpService.postForm(`${environment.LOANS_URL}` + '/payment', fields).subscribe(
-                    (response: any) => {
-                        console.log("Payment submitted successfully!");
-                        this.modalRef.close();
-                        this.router.navigateByUrl('/loans/paid');
-                    }, error => {
-                        console.log("Form submit failed - Status " + error.status);
-                    }
-                );
+                this.modalRef.close();
+                this.router.navigateByUrl('/loans/paid');
 
             }, error => {
                 if (error.status == 422) {
